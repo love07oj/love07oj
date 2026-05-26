@@ -1351,7 +1351,7 @@ export default function Home() {
                     </a>
                     
                     <a 
-                      href="https://github.com/yourgithub" 
+                      href="https://github.com/love07oj" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="flex-1 flex items-center justify-between p-3 rounded bg-zinc-950/40 border border-zinc-900 hover:border-zinc-805 hover:text-white transition-all group"
