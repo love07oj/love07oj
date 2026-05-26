@@ -1,6 +1,6 @@
 {
-  "name": "Charcoal Page with Gradient Cursor",
-  "description": "A blank page with a dark charcoal background and a dynamic custom green gradient cursor.",
+  "name": "love07oj",
+  "description": "love07oj - Portfolio and Cyber Security Analyst workspace.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

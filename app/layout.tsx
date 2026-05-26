@@ -18,8 +18,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Charcoal Page with Gradient Cursor',
-  description: 'A blank page with a dark charcoal background and a dynamic custom green gradient cursor.',
+  title: 'love07oj',
+  description: 'love07oj - Portfolio and Cyber Security Analyst workspace.',
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
