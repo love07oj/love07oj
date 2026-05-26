@@ -1,0 +1,6 @@
+{
+  "name": "Charcoal Page with Gradient Cursor",
+  "description": "A blank page with a dark charcoal background and a dynamic custom green gradient cursor.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
