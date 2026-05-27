@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { motion, useMotionValue, useSpring, AnimatePresence } from 'motion/react';
 import { 
   Shield, 
@@ -420,18 +421,42 @@ function NmapTerminal({ activeTheme }: { activeTheme: any }) {
 
           let textColor = 'text-zinc-400';
           if (isHighRisk) {
-            textColor = 'text-[#ef2929] font-semibold';
+            textColor = 'text-rose-500 font-semibold';
           } else if (isSuccess) {
-            textColor = 'text-[#8ae234]/95 font-medium';
+            textColor = 'text-emerald-400 font-medium';
           } else if (isCompleted) {
             textColor = 'text-zinc-200 font-bold border-t border-zinc-900/60 pt-1 mt-1';
           } else if (line.startsWith('|')) {
             textColor = 'text-zinc-500';
           }
 
+          let contentNode: React.ReactNode = line;
+          if (!isHighRisk && !isCompleted && !line.startsWith('|')) {
+            const parts = line.split(/(\s+)/);
+            contentNode = parts.map((part, pIdx) => {
+              if (/^\d+\/(tcp|udp)$/.test(part)) {
+                return <span key={pIdx} className="text-cyan-400 font-semibold">{part}</span>;
+              }
+              if (/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(part)) {
+                return <span key={pIdx} className="text-amber-400 font-medium">{part}</span>;
+              }
+              if (part === 'open') {
+                return <span key={pIdx} className="text-emerald-400 font-bold">{part}</span>;
+              }
+              if (part === 'closed' || part === 'filtered') {
+                return <span key={pIdx} className="text-[#ef2929]">{part}</span>;
+              }
+              const standardService = ['kerberos-sec', 'msrpc', 'ldap', 'microsoft-ds', 'http'].includes(part.toLowerCase()) || part.startsWith('Windows');
+              if (standardService) {
+                return <span key={pIdx} className="text-purple-400">{part}</span>;
+              }
+              return <span key={pIdx}>{part}</span>;
+            });
+          }
+
           return (
             <div key={idx} className={`leading-relaxed break-all select-text font-mono text-[9.5px] ${textColor}`}>
-              {line}
+              {contentNode}
             </div>
           );
         })}
@@ -830,16 +855,15 @@ export default function Home() {
             [ about_me ]
           </button>
           
-          <button 
-            type="button"
-            onClick={() => scrollToSection('blogs')}
+          <Link 
+            href="/blogs"
             className="hover:text-zinc-200 transition-colors uppercase px-1 py-0.5"
             onMouseEnter={() => setIsHovered('nav-blogs')}
             onMouseLeave={() => setIsHovered(null)}
             style={{ color: isHovered === 'nav-blogs' ? activeTheme.from : undefined }}
           >
             [ blogs ]
-          </button>
+          </Link>
 
           <button 
             type="button"
@@ -967,47 +991,60 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 select-text">
             {BLOGS.map((blog) => (
-              <motion.div
-                key={blog.id}
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.3 }}
-                onClick={() => setSelectedBlog(blog)}
-                className="p-6 rounded-xl border border-zinc-900/80 bg-[#101011]/85 backdrop-blur-md relative overflow-hidden group flex flex-col justify-between h-full hover:border-zinc-800 transition-colors"
-                onMouseEnter={() => setIsHovered(`blog-${blog.id}`)}
-                onMouseLeave={() => setIsHovered(null)}
-              >
-                {/* Visual accent corner decoration */}
-                <div className="absolute top-0 right-0 w-2 h-2 border-r border-t border-zinc-800/40 group-hover:border-zinc-500/50 transition-colors" style={{ borderColor: isHovered === `blog-${blog.id}` ? activeTheme.from : undefined }} />
-                <div className="absolute bottom-0 left-0 w-2 h-2 border-l border-b border-zinc-800/40 group-hover:border-zinc-500/50 transition-colors" style={{ borderColor: isHovered === `blog-${blog.id}` ? activeTheme.to : undefined }} />
-                
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span 
-                      className="px-2 py-0.5 rounded text-[8px] font-mono tracking-widest bg-zinc-950 border border-zinc-850" 
-                      style={{ color: activeTheme.from, borderColor: `${activeTheme.from}1c` }}
-                    >
-                      {blog.tag}
-                    </span>
-                    <span className="text-[10px] font-mono text-zinc-500">{blog.readTime}</span>
+              <Link href="/blogs" key={blog.id} className="block text-left cursor-pointer">
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.3 }}
+                  className="p-6 rounded-xl border border-zinc-900/80 bg-[#101011]/85 backdrop-blur-md relative overflow-hidden group flex flex-col justify-between h-full hover:border-zinc-800 transition-colors"
+                  onMouseEnter={() => setIsHovered(`blog-${blog.id}`)}
+                  onMouseLeave={() => setIsHovered(null)}
+                >
+                  {/* Visual accent corner decoration */}
+                  <div className="absolute top-0 right-0 w-2 h-2 border-r border-t border-zinc-800/40 group-hover:border-zinc-500/50 transition-colors" style={{ borderColor: isHovered === `blog-${blog.id}` ? activeTheme.from : undefined }} />
+                  <div className="absolute bottom-0 left-0 w-2 h-2 border-l border-b border-zinc-800/40 group-hover:border-zinc-500/50 transition-colors" style={{ borderColor: isHovered === `blog-${blog.id}` ? activeTheme.to : undefined }} />
+                  
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span 
+                        className="px-2 py-0.5 rounded text-[8px] font-mono tracking-widest bg-zinc-950 border border-zinc-850" 
+                        style={{ color: activeTheme.from, borderColor: `${activeTheme.from}1c` }}
+                      >
+                        {blog.tag}
+                      </span>
+                      <span className="text-[10px] font-mono text-zinc-500">{blog.readTime}</span>
+                    </div>
+                    
+                    <h4 className="text-base font-sans font-normal text-zinc-200 group-hover:text-zinc-100 transition-colors line-clamp-2 leading-snug">
+                      {blog.title}
+                    </h4>
+                    
+                    <p className="text-xs text-zinc-400 font-light mt-2.5 line-clamp-2 leading-relaxed">
+                      {blog.excerpt}
+                    </p>
                   </div>
-                  
-                  <h4 className="text-base font-sans font-normal text-zinc-200 group-hover:text-zinc-100 transition-colors line-clamp-2 leading-snug">
-                    {blog.title}
-                  </h4>
-                  
-                  <p className="text-xs text-zinc-400 font-light mt-2.5 line-clamp-2 leading-relaxed">
-                    {blog.excerpt}
-                  </p>
-                </div>
 
-                <div className="border-t border-zinc-900/60 pt-4 mt-5 flex items-center justify-between font-mono text-[9px] text-zinc-500">
-                  <span>DISCLOSED: {blog.date}</span>
-                  <span className="flex items-center gap-1.5 text-zinc-400 group-hover:text-zinc-200 transition-colors font-medium">
-                    DECRYPT &amp; READ <ChevronRight className="w-3.5 h-3.5" style={{ color: activeTheme.from }} />
-                  </span>
-                </div>
-              </motion.div>
+                  <div className="border-t border-zinc-900/60 pt-4 mt-5 flex items-center justify-between font-mono text-[9px] text-zinc-550">
+                    <span>DISCLOSED: {blog.date}</span>
+                    <span className="flex items-center gap-1.5 text-zinc-400 group-hover:text-zinc-200 transition-colors font-medium">
+                      DECRYPT &amp; READ <ChevronRight className="w-3.5 h-3.5" style={{ color: activeTheme.from }} />
+                    </span>
+                  </div>
+                </motion.div>
+              </Link>
             ))}
+          </div>
+
+          {/* Dynamic Link connected to secondary Notion blog router */}
+          <div className="mt-4 flex justify-center w-full">
+            <Link
+              href="/blogs"
+              className="px-6 py-4 rounded-xl border border-dashed border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/10 hover:border-emerald-500/40 text-emerald-400 font-mono text-xs tracking-widest uppercase flex items-center gap-3 transition-all duration-305 w-full justify-center group cursor-pointer"
+              style={{ borderColor: `${activeTheme.from}2c`, color: activeTheme.from }}
+            >
+              <Terminal className="w-4 h-4 animate-pulse" style={{ color: activeTheme.from }} />
+              <span>ACCESS FULL OPERATIONS PORTAL & NOTION WRITEUPS ARCHIVE</span>
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" style={{ color: activeTheme.from }} />
+            </Link>
           </div>
         </section>
 
