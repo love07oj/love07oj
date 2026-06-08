@@ -8,7 +8,7 @@ export const revalidate = 86400;
 export default async function BlogsPage() {
   // Fetch blogs directly in the Server Component
   const blogs = await fetchAllBlogs();
-  const liveConnected = !!(process.env.NOTION_TOKEN && process.env.NOTION_DATABASE_ID);
+  // const liveConnected = !!(process.env.NOTION_TOKEN && process.env.NOTION_DATABASE_ID);
 
-  return <BlogsClient initialBlogs={blogs} liveConnected={liveConnected} />;
+  return <BlogsClient initialBlogs={blogs} />;
 }
