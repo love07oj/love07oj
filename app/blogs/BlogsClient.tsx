@@ -155,7 +155,7 @@ export default function BlogsClient({ initialBlogs, liveConnected }: BlogsClient
           <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-gradient-to-b from-emerald-500/40 via-transparent to-transparent -ml-4 pl-4 hidden sm:block" />
         </section>
 
-        {/* NOTION CONNECTION STATUS BANNER */}
+        /* {/* NOTION CONNECTION STATUS BANNER */}
         {!liveConnected && (
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
@@ -177,7 +177,7 @@ export default function BlogsClient({ initialBlogs, liveConnected }: BlogsClient
               </span>
             </div>
           </motion.div>
-        )}
+        )} */
 
         {/* SEARCH & FILTERS WORKSPACE */}
         <section className="bg-zinc-950/40 border border-zinc-900 rounded p-6 flex flex-col gap-6 backdrop-blur-sm shadow-xl">
