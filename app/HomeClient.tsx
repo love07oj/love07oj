@@ -962,7 +962,7 @@ export default function Home({ initialBlogs }: HomeClientProps) {
             <div className="mt-8 flex flex-wrap gap-4 font-mono text-[9.5px] tracking-widest uppercase">
               <button
                 onClick={() => {
-                  window.open('public/Ojasva_Meshram_Offensive_Security_Resume.pdf', '_blank');
+                  window.open('/love07oj/Ojasva_Meshram_Offensive_Security_Resume.pdf', '_blank');
                 }}
                 className="px-5 py-3 rounded-lg font-medium border border-zinc-800 bg-[#121214]/65 hover:bg-zinc-900 hover:border-zinc-700 hover:text-white transition-all flex items-center gap-2.5 group shadow-[0_0_20px_rgba(255,255,255,0.01)]"
                 onMouseEnter={() => setIsHovered('cta-resume')}
