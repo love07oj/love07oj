@@ -961,26 +961,20 @@ export default function Home({ initialBlogs }: HomeClientProps) {
             {/* Resume download CTA button replacing the old connected action CTA */}
             <div className="mt-8 flex flex-wrap gap-4 font-mono text-[9.5px] tracking-widest uppercase">
               <button
-                onClick={() => {
-                  // Trigger safe resume helper
-                  const link = document.createElement('a');
-                  link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent('OJASVA MESHRAM - Offensive Security & VAPT Lead Resume');
-                  link.download = 'Ojasva_Meshram_Offensive_Security_Resume.pdf';
-                  document.body.appendChild(link);
-                  link.click();
-                  document.body.removeChild(link);
-                }}
-                className="px-5 py-3 rounded-lg font-medium border border-zinc-800 bg-[#121214]/65 hover:bg-zinc-900 hover:border-zinc-700 hover:text-white transition-all flex items-center gap-2.5 group shadow-[0_0_20px_rgba(255,255,255,0.01)]"
-                onMouseEnter={() => setIsHovered('cta-resume')}
-                onMouseLeave={() => setIsHovered(null)}
-                style={{ 
-                  borderColor: isHovered === 'cta-resume' ? activeTheme.from : undefined,
-                  color: isHovered === 'cta-resume' ? activeTheme.from : undefined 
-                }}
-              >
-                <Download className="w-4 h-4" />
-                <span>[ DOWNLOAD_OFFENSIVE_RESUME ]</span>
-              </button>
+  onClick={() => {
+    window.open('/Ojasva_Meshram_Offensive_Security_Resume.pdf', '_blank');
+  }}
+  className="px-5 py-3 rounded-lg font-medium border border-zinc-800 bg-[#121214]/65 hover:bg-zinc-900 hover:border-zinc-700 hover:text-white transition-all flex items-center gap-2.5 group shadow-[0_0_20px_rgba(255,255,255,0.01)]"
+  onMouseEnter={() => setIsHovered('cta-resume')}
+  onMouseLeave={() => setIsHovered(null)}
+  style={{
+    borderColor: isHovered === 'cta-resume' ? activeTheme.from : undefined,
+    color: isHovered === 'cta-resume' ? activeTheme.from : undefined
+  }}
+>
+  <Download className="w-4 h-4" />
+  <span>[ DOWNLOAD_OFFENSIVE_RESUME ]</span>
+</button>
             </div>
           </div>
 
