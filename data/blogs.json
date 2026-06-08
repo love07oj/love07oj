@@ -1,0 +1,85 @@
+[
+  {
+    "id": "36f3405d-7b65-80d1-9c87-eb1751a715b1",
+    "title": "Vanguard Cyber hiring CTF -Operation MERIDIAN",
+    "slug": "vanguard-cyber-hiring-ctf",
+    "type": "multi ctf",
+    "platform": "CTF",
+    "difficulty": "easy",
+    "tags": [
+      "web",
+      "DFIR",
+      "Stegnography",
+      "OSINT"
+    ],
+    "published": true,
+    "featured": true,
+    "date": "2026-05-29",
+    "cover": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=1200",
+    "summary": "a mix of many techniques , web , stegno , DFIR , "
+  },
+  {
+    "id": "36d3405d-7b65-80cd-9366-d8f16c951375",
+    "title": "Editorial (1)",
+    "slug": "editorial",
+    "type": "htb-machine",
+    "platform": "Hack the box",
+    "difficulty": "easy",
+    "tags": [
+      "ssrf",
+      "git"
+    ],
+    "published": true,
+    "featured": true,
+    "date": "2026-05-27",
+    "cover": "https://labs.hackthebox.com/storage/avatars/a466db5ce4f7aaea98f588d1cb71a0aa.png",
+    "summary": "No summary provided for this security writeup."
+  },
+  {
+    "id": "36d3405d-7b65-8099-81e0-ec2adcd92681",
+    "title": "Operation Breadcrumbs TCM security",
+    "slug": "operation-breadcrumbs-tcm-security",
+    "type": "multi ctf",
+    "platform": "CTF",
+    "difficulty": "medium",
+    "tags": [],
+    "published": true,
+    "featured": true,
+    "date": "2026-05-27",
+    "cover": "https://ctf.tcmsecurity.com/banner.png",
+    "summary": "No summary provided for this security writeup."
+  },
+  {
+    "id": "36d3405d-7b65-8019-93f7-ed889b154950",
+    "title": "Editorial",
+    "slug": "editorial",
+    "type": "htb-machine",
+    "platform": "Hack the box",
+    "difficulty": "easy",
+    "tags": [
+      "ssrf",
+      "git"
+    ],
+    "published": true,
+    "featured": true,
+    "date": "2026-05-27",
+    "cover": "https://labs.hackthebox.com/storage/avatars/a466db5ce4f7aaea98f588d1cb71a0aa.png",
+    "summary": "No summary provided for this security writeup."
+  },
+  {
+    "id": "3693405d-7b65-8041-a66e-d6f30609ccaa",
+    "title": "test",
+    "slug": "test-page",
+    "type": "test",
+    "platform": "test",
+    "difficulty": "easy",
+    "tags": [
+      "test"
+    ],
+    "published": true,
+    "featured": true,
+    "date": "2026-05-23",
+    "cover": "https://app.notion.com/images/page-cover/rijksmuseum_jansz_1641.jpg",
+    "summary": "No summary provided for this security writeup."
+  }
+]

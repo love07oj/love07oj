@@ -118,11 +118,29 @@ export const revalidate = 86400;
 export async function generateStaticParams() {
   const blogs = await fetchAllBlogs();
 
-  return blogs.map((blog) => ({
-    type: encodeURIComponent(blog.type.replace(/\s+/g, '-')),
-    platform: encodeURIComponent(blog.platform.replace(/\s+/g, '-')),
-    slug: blog.slug,
-  }));
+  const paramsList: Array<{ type: string; platform: string; slug: string }> = [];
+  const seenKeys = new Set<string>();
+
+  for (const blog of blogs) {
+    if (!blog.type || !blog.platform || !blog.slug) continue;
+
+    const formattedType = encodeURIComponent(blog.type.trim().replace(/\s+/g, '-'));
+    const formattedPlatform = encodeURIComponent(blog.platform.trim().replace(/\s+/g, '-'));
+    // Ensure slug is clean, trimmed, lowercase, with spaces turned to hyphens
+    const formattedSlug = blog.slug.trim().toLowerCase().replace(/\s+/g, '-');
+
+    const key = `${formattedType}/${formattedPlatform}/${formattedSlug}`;
+    if (!seenKeys.has(key)) {
+      seenKeys.add(key);
+      paramsList.push({
+        type: formattedType,
+        platform: formattedPlatform,
+        slug: formattedSlug,
+      });
+    }
+  }
+
+  return paramsList;
 }
 
 export default async function BlogDetailPage({ params }: PageProps) {

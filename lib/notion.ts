@@ -1,5 +1,7 @@
 import { Client } from '@notionhq/client';
 import { cache } from 'react';
+import fs from 'fs';
+import path from 'path';
 
 export interface BlogPost {
   id: string;
@@ -203,12 +205,14 @@ function parseNotionPage(page: any): BlogPost {
   } else {
     slug = page.id; // fallback
   }
+  // Trim and convert slug to a clean, URL-safe format block by replacing spaces with hyphens
+  slug = slug.trim().toLowerCase().replace(/\s+/g, '-');
 
   // Extract Type (Select)
-  const type = props.Type?.select?.name || 'Vulnerability Analysis';
+  const type = (props.Type?.select?.name || 'Vulnerability Analysis').trim();
 
   // Extract Platform (Select)
-  const platform = props.Platform?.select?.name || 'Local Lab';
+  const platform = (props.Platform?.select?.name || 'Local Lab').trim();
 
   // Extract Difficulty (Select)
   const difficulty = props.Difficulty?.select?.name || 'Medium';
@@ -349,76 +353,35 @@ async function queryNotionDatabaseOrDataSource(
 }
 
 export const fetchAllBlogs = cache(async (): Promise<BlogPost[]> => {
-  const client = getNotionClient();
-  if (!client) {
-    console.log('Notion API elements missing or unconfigured. Returning default high-fidelity blogs.');
-    return FALLBACK_BLOGS;
-  }
-
   try {
-    const databaseId = process.env.NOTION_DATABASE_ID!;
-    const response = await queryNotionDatabaseOrDataSource(client, databaseId, {
-      filter: {
-        property: 'Published',
-        checkbox: {
-          equals: true,
-        },
-      },
-      sorts: [
-        {
-          property: 'Date',
-          direction: 'descending',
-        },
-      ],
-    });
-
-    return response.results.map((page: any) => parseNotionPage(page));
+    const blogsPath = path.join(process.cwd(), 'data', 'blogs.json');
+    if (fs.existsSync(blogsPath)) {
+      const data = fs.readFileSync(blogsPath, 'utf-8');
+      return JSON.parse(data);
+    }
   } catch (error) {
-    console.error('Failed to fetch from Notion API database:', error);
-    // Suppress error and fallback so user preview doesn't break
-    return FALLBACK_BLOGS;
+    console.error('Failed to read local static blogs.json:', error);
   }
+
+  console.log('Static blogs.json missing or failed. Returning fallback high-fidelity blogs.');
+  return FALLBACK_BLOGS;
 });
 
 export const fetchBlogBySlug = cache(async (slug: string): Promise<BlogPost | null> => {
-  const client = getNotionClient();
-  const decodedSlug = decodeURIComponent(slug).trim().toLowerCase();
+  const decodedSlug = decodeURIComponent(slug).trim().toLowerCase().replace(/\s+/g, '-');
   
-  // If not configured, check inside of fallback items
-  if (!client) {
-    const localPost = FALLBACK_BLOGS.find((p) => p.slug.trim().toLowerCase() === decodedSlug);
-    return localPost || null;
-  }
-
   try {
-    // 1. Fetch all blogs using the cached function
-    const allBlogs = await fetchAllBlogs();
-    
-    // 2. Find the blog matching the slug (case-insensitive & trimmed)
-    const matchedBlog = allBlogs.find((b) => b.slug.trim().toLowerCase() === decodedSlug);
-    
-    if (!matchedBlog) {
-      // Look in fallback blogs as a fallback
-      const localPost = FALLBACK_BLOGS.find((p) => p.slug.trim().toLowerCase() === decodedSlug);
-      return localPost || null;
+    const postPath = path.join(process.cwd(), 'data', 'posts', `${decodedSlug}.json`);
+    if (fs.existsSync(postPath)) {
+      const data = fs.readFileSync(postPath, 'utf-8');
+      return JSON.parse(data);
     }
-
-    // Dynamic blocks query to fetch page content children using the precise Notion ID
-    const blockResponse = await (client as any).blocks.children.list({
-      block_id: matchedBlog.id,
-      page_size: 100,
-    });
-
-    const completePost = {
-      ...matchedBlog,
-      blocks: parseNotionBlocks(blockResponse.results)
-    };
-    
-    return completePost;
   } catch (error) {
-    console.error(`Failed to fetch Notion content for slug ${slug}:`, error);
-    const localPost = FALLBACK_BLOGS.find((p) => p.slug.trim().toLowerCase() === decodedSlug);
-    return localPost || null;
+    console.error(`Failed to read local static post file for slug ${slug}:`, error);
   }
+
+  console.log(`Static post file for slug ${slug} missing or failed. Checking inside of fallback items.`);
+  const localPost = FALLBACK_BLOGS.find((p) => p.slug.trim().toLowerCase() === decodedSlug);
+  return localPost || null;
 });
 
