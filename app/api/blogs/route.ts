@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { fetchAllBlogs, fetchBlogBySlug } from '@/lib/notion';
 
+export const revalidate = 86400;
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);

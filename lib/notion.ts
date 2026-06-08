@@ -1,4 +1,5 @@
 import { Client } from '@notionhq/client';
+import { cache } from 'react';
 
 export interface BlogPost {
   id: string;
@@ -19,6 +20,7 @@ export interface BlogPost {
     type: string;
     content: string;
     language?: string;
+    caption?: string;
   }>;
 }
 
@@ -266,8 +268,8 @@ function parseNotionPage(page: any): BlogPost {
 }
 
 // Convert Notion Blocks to simple structured objects for rendering
-function parseNotionBlocks(blocks: any[]): Array<{ type: string; content: string; language?: string }> {
-  const result: Array<{ type: string; content: string; language?: string }> = [];
+function parseNotionBlocks(blocks: any[]): Array<{ type: string; content: string; language?: string; caption?: string }> {
+  const result: Array<{ type: string; content: string; language?: string; caption?: string }> = [];
   
   for (const block of blocks) {
     const type = block.type;
@@ -300,7 +302,8 @@ function parseNotionBlocks(blocks: any[]): Array<{ type: string; content: string
       if (content) result.push({ type: 'quote', content });
     } else if (type === 'image') {
       const imgUrl = block.image.type === 'external' ? block.image.external.url : block.image.file.url;
-      result.push({ type: 'image', content: imgUrl });
+      const caption = block.image.caption?.map((t: any) => t.plain_text).join('') || '';
+      result.push({ type: 'image', content: imgUrl, caption });
     } else if (type === 'callout') {
       content = block.callout.rich_text.map((t: any) => t.plain_text).join('');
       if (content) result.push({ type: 'callout', content });
@@ -345,7 +348,7 @@ async function queryNotionDatabaseOrDataSource(
   });
 }
 
-export async function fetchAllBlogs(): Promise<BlogPost[]> {
+export const fetchAllBlogs = cache(async (): Promise<BlogPost[]> => {
   const client = getNotionClient();
   if (!client) {
     console.log('Notion API elements missing or unconfigured. Returning default high-fidelity blogs.');
@@ -375,59 +378,47 @@ export async function fetchAllBlogs(): Promise<BlogPost[]> {
     // Suppress error and fallback so user preview doesn't break
     return FALLBACK_BLOGS;
   }
-}
+});
 
-export async function fetchBlogBySlug(slug: string): Promise<BlogPost | null> {
+export const fetchBlogBySlug = cache(async (slug: string): Promise<BlogPost | null> => {
   const client = getNotionClient();
+  const decodedSlug = decodeURIComponent(slug).trim().toLowerCase();
   
   // If not configured, check inside of fallback items
   if (!client) {
-    const localPost = FALLBACK_BLOGS.find((p) => p.slug === slug);
+    const localPost = FALLBACK_BLOGS.find((p) => p.slug.trim().toLowerCase() === decodedSlug);
     return localPost || null;
   }
 
   try {
-    const databaseId = process.env.NOTION_DATABASE_ID!;
-    const response = await queryNotionDatabaseOrDataSource(client, databaseId, {
-      filter: {
-        and: [
-          {
-            property: 'Slug',
-            rich_text: {
-              equals: slug,
-            },
-          },
-          {
-            property: 'Published',
-            checkbox: {
-              equals: true,
-            },
-          },
-        ],
-      },
-    });
-
-    if (response.results.length === 0) {
-      // If real Notion database doesn't have it, look in local fallback (good security buffer!)
-      const localPost = FALLBACK_BLOGS.find((p) => p.slug === slug);
+    // 1. Fetch all blogs using the cached function
+    const allBlogs = await fetchAllBlogs();
+    
+    // 2. Find the blog matching the slug (case-insensitive & trimmed)
+    const matchedBlog = allBlogs.find((b) => b.slug.trim().toLowerCase() === decodedSlug);
+    
+    if (!matchedBlog) {
+      // Look in fallback blogs as a fallback
+      const localPost = FALLBACK_BLOGS.find((p) => p.slug.trim().toLowerCase() === decodedSlug);
       return localPost || null;
     }
 
-    const page: any = response.results[0];
-    const post = parseNotionPage(page);
-
-    // Dynamic blocks query to fetch page content children
+    // Dynamic blocks query to fetch page content children using the precise Notion ID
     const blockResponse = await (client as any).blocks.children.list({
-      block_id: page.id,
+      block_id: matchedBlog.id,
       page_size: 100,
     });
 
-    post.blocks = parseNotionBlocks(blockResponse.results);
-    return post;
+    const completePost = {
+      ...matchedBlog,
+      blocks: parseNotionBlocks(blockResponse.results)
+    };
+    
+    return completePost;
   } catch (error) {
     console.error(`Failed to fetch Notion content for slug ${slug}:`, error);
-    const localPost = FALLBACK_BLOGS.find((p) => p.slug === slug);
+    const localPost = FALLBACK_BLOGS.find((p) => p.slug.trim().toLowerCase() === decodedSlug);
     return localPost || null;
   }
-}
+});
 

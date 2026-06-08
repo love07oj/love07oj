@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 import { 
   Shield, 
   Terminal, 
@@ -25,6 +26,7 @@ import { fetchBlogBySlug, fetchAllBlogs } from '@/lib/notion';
 import CopyButton from '@/components/CopyButton';
 import BlogDetailSidebar from '@/components/BlogDetailSidebar';
 import ReadingProgressBar from '@/components/ReadingProgressBar';
+import BlogImage from '@/components/BlogImage';
 
 // High-contrast, dynamic syntax highlighter custom helper to make shell commands and codes beautiful and colorful
 function highlightCode(code: string, language: string = '') {
@@ -110,6 +112,8 @@ interface PageProps {
     slug: string;
   }>;
 }
+
+export const revalidate = 86400;
 
 export default async function BlogDetailPage({ params }: PageProps) {
   // Await the route params as required in Next.js 15+
@@ -222,19 +226,23 @@ export default async function BlogDetailPage({ params }: PageProps) {
           {/* Article Banner Image */}
           <div className="relative w-full h-64 sm:h-80 bg-zinc-950 flex items-center justify-center">
             {/* Ambient background glow from the image itself */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={blog.cover}
               alt=""
-              className="absolute inset-0 w-full h-full object-cover blur-2xl scale-125 opacity-20 select-none pointer-events-none"
+              fill
+              sizes="100vw"
+              priority
+              className="object-cover blur-2xl scale-125 opacity-20 select-none pointer-events-none"
               referrerPolicy="no-referrer"
             />
             {/* Crisp centered foreground image (doesn't pixelate if it's small) */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={blog.cover}
               alt={blog.title}
-              className="relative z-10 max-w-full max-h-full object-contain p-4 opacity-75"
+              fill
+              sizes="100vw"
+              priority
+              className="z-10 p-4 opacity-75 object-contain"
               referrerPolicy="no-referrer"
             />
             <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#0C0C0C] via-[#0C0C0C]/45 to-transparent z-10" />
@@ -402,15 +410,11 @@ export default async function BlogDetailPage({ params }: PageProps) {
                       );
                     case 'image':
                       return (
-                        <div key={idx} className="border border-zinc-900 rounded overflow-hidden relative w-full h-80 my-4 bg-zinc-900/10">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img 
-                            src={block.content} 
-                            alt="Security walkthrough screenshot" 
-                            className="w-full h-full object-cover"
-                            referrerPolicy="no-referrer"
-                          />
-                        </div>
+                        <BlogImage 
+                          key={idx}
+                          src={block.content} 
+                          alt={block.caption || "Security walkthrough screenshot"} 
+                        />
                       );
                     default:
                       return null;
