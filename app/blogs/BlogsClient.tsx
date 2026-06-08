@@ -18,10 +18,10 @@ import { BlogPost } from '@/lib/notion';
 
 interface BlogsClientProps {
   initialBlogs: BlogPost[];
-  liveConnected: boolean;
+  // liveConnected: boolean;
 }
 
-export default function BlogsClient({ initialBlogs, liveConnected }: BlogsClientProps) {
+export default function BlogsClient({ initialBlogs }: BlogsClientProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedType, setSelectedType] = useState<string>('All');
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('All');
