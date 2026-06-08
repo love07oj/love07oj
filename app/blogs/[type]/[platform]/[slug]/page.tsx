@@ -115,6 +115,16 @@ interface PageProps {
 
 export const revalidate = 86400;
 
+export async function generateStaticParams() {
+  const blogs = await fetchAllBlogs();
+
+  return blogs.map((blog) => ({
+    type: encodeURIComponent(blog.type.replace(/\s+/g, '-')),
+    platform: encodeURIComponent(blog.platform.replace(/\s+/g, '-')),
+    slug: blog.slug,
+  }));
+}
+
 export default async function BlogDetailPage({ params }: PageProps) {
   // Await the route params as required in Next.js 15+
   const resolvedParams = await params;

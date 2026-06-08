@@ -594,6 +594,13 @@ export default function Home() {
   // Selected blog state for interactive loading modal
   const [selectedBlog, setSelectedBlog] = useState<typeof BLOGS[0] | null>(null);
 
+  const [featuredBlogsList, setFeaturedBlogsList] = useState<any[]>(() => {
+    return BLOGS.map(b => ({
+      ...b,
+      hrefPath: '/blogs'
+    }));
+  });
+
   // Motion values for fluid trail
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
@@ -624,6 +631,37 @@ export default function Home() {
         `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`
       );
     }, 1000);
+
+    // Fetch featured blogs dynamically
+    fetch('/api/blogs')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && Array.isArray(data.blogs)) {
+          // Filter blogs marked as featured
+          const featured = data.blogs.filter((b: any) => b.featured === true);
+          // Highlight at least 2 rows of items or fall back to first 4
+          const targetBlogs = featured.length > 0 ? featured : data.blogs.slice(0, 4);
+
+          const mapped = targetBlogs.map((b: any) => {
+            const formatSegment = (s: string) => encodeURIComponent((s || '').replace(/\s+/g, '-'));
+            const hrefPath = b.type && b.platform && b.slug
+              ? `/blogs/${formatSegment(b.type)}/${formatSegment(b.platform)}/${b.slug}`
+              : `/blogs`;
+
+            return {
+              id: b.id,
+              title: b.title,
+              date: b.date || 'RECENT',
+              readTime: b.readTime || (b.difficulty ? `${b.difficulty.toUpperCase()} • 5 min read` : '5 min read'),
+              tag: (b.type || b.tag || 'SECURITY WRITEUP').toUpperCase(),
+              excerpt: b.summary || b.excerpt || '',
+              hrefPath: hrefPath
+            };
+          });
+          setFeaturedBlogsList(mapped);
+        }
+      })
+      .catch((err) => console.error('Failed to load featured blogs:', err));
 
     // Escape listener for accessibility closing of modal
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -990,8 +1028,8 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 select-text">
-            {BLOGS.map((blog) => (
-              <Link href="/blogs" key={blog.id} className="block text-left cursor-pointer">
+            {featuredBlogsList.map((blog) => (
+              <Link href={blog.hrefPath} key={blog.id} className="block text-left cursor-pointer">
                 <motion.div
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.3 }}
@@ -1014,7 +1052,7 @@ export default function Home() {
                       <span className="text-[10px] font-mono text-zinc-500">{blog.readTime}</span>
                     </div>
                     
-                    <h4 className="text-base font-sans font-normal text-zinc-200 group-hover:text-zinc-100 transition-colors line-clamp-2 leading-snug">
+                    <h4 className="text-base font-sans font-normal text-zinc-200 group-hover:text-zinc-100 transition-colors line-clamp-2 leading-snug font-medium">
                       {blog.title}
                     </h4>
                     
