@@ -1,5 +1,19 @@
 [
   {
+    "id": "3763405d-7b65-801a-a190-ec88b6a30195",
+    "title": "GPN CTF 2026restaurant-builder",
+    "slug": "3763405d-7b65-801a-a190-ec88b6a30195",
+    "type": "Vulnerability Analysis",
+    "platform": "Local Lab",
+    "difficulty": "Medium",
+    "tags": [],
+    "published": true,
+    "featured": false,
+    "date": "2026-06-06",
+    "cover": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=1200",
+    "summary": "No summary provided for this security writeup."
+  },
+  {
     "id": "36f3405d-7b65-80d1-9c87-eb1751a715b1",
     "title": "Vanguard Cyber hiring CTF -Operation MERIDIAN",
     "slug": "vanguard-cyber-hiring-ctf",
@@ -30,7 +44,7 @@
       "git"
     ],
     "published": true,
-    "featured": true,
+    "featured": false,
     "date": "2026-05-27",
     "cover": "https://labs.hackthebox.com/storage/avatars/a466db5ce4f7aaea98f588d1cb71a0aa.png",
     "summary": "No summary provided for this security writeup."

