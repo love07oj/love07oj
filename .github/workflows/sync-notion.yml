@@ -50,5 +50,5 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -m "chore: auto-sync Notion CMS content [skip ci]"
+          git commit -m "chore: auto-sync Notion CMS content"
           git push origin HEAD:main
