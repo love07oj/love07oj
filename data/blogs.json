@@ -33,23 +33,6 @@
     "summary": "a mix of many techniques , web , stegno , DFIR , "
   },
   {
-    "id": "36d3405d-7b65-80cd-9366-d8f16c951375",
-    "title": "Editorial (1)",
-    "slug": "editorial",
-    "type": "htb-machine",
-    "platform": "Hack the box",
-    "difficulty": "easy",
-    "tags": [
-      "ssrf",
-      "git"
-    ],
-    "published": true,
-    "featured": false,
-    "date": "2026-05-27",
-    "cover": "https://labs.hackthebox.com/storage/avatars/a466db5ce4f7aaea98f588d1cb71a0aa.png",
-    "summary": "No summary provided for this security writeup."
-  },
-  {
     "id": "36d3405d-7b65-8099-81e0-ec2adcd92681",
     "title": "Operation Breadcrumbs TCM security",
     "slug": "operation-breadcrumbs-tcm-security",
@@ -78,22 +61,6 @@
     "featured": true,
     "date": "2026-05-27",
     "cover": "https://labs.hackthebox.com/storage/avatars/a466db5ce4f7aaea98f588d1cb71a0aa.png",
-    "summary": "No summary provided for this security writeup."
-  },
-  {
-    "id": "3693405d-7b65-8041-a66e-d6f30609ccaa",
-    "title": "test",
-    "slug": "test-page",
-    "type": "test",
-    "platform": "test",
-    "difficulty": "easy",
-    "tags": [
-      "test"
-    ],
-    "published": true,
-    "featured": true,
-    "date": "2026-05-23",
-    "cover": "https://app.notion.com/images/page-cover/rijksmuseum_jansz_1641.jpg",
     "summary": "No summary provided for this security writeup."
   }
 ]
