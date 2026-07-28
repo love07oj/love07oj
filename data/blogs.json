@@ -1,5 +1,22 @@
 [
   {
+    "id": "38a3405d-7b65-8078-b6ed-e8f438f9532b",
+    "title": "Leaky Jar Intigriti June Challenge",
+    "slug": "leaky-jar-intigriti-june-challenge",
+    "type": "CTF",
+    "platform": "Intigriti",
+    "difficulty": "easy",
+    "tags": [
+      "CSRF",
+      "ssrf"
+    ],
+    "published": true,
+    "featured": true,
+    "date": "2026-06-25",
+    "cover": "https://leakyjar.intigriti.io/static/images/logo.svg",
+    "summary": "using csrf to gain unauthorized data"
+  },
+  {
     "id": "3763405d-7b65-801a-a190-ec88b6a30195",
     "title": "GPN CTF 2026restaurant-builder",
     "slug": "gpn-ctf-2026",

