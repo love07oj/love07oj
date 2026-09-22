@@ -75,7 +75,7 @@
       "git"
     ],
     "published": true,
-    "featured": true,
+    "featured": false,
     "date": "2026-05-27",
     "cover": "https://labs.hackthebox.com/storage/avatars/a466db5ce4f7aaea98f588d1cb71a0aa.png",
     "summary": "No summary provided for this security writeup."
